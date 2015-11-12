@@ -1,12 +1,16 @@
 <?php
 
-	function azururajVreme() {
-		// WUnderground API key
-		$key = "API";
-		$apiURL = "http://api.wunderground.com/api/$key/conditions/lang:SR/q/Serbia/Nis.xml";
+	function azurirajVreme() {
+		// Otvaranje datoteke sa WU API ključem
+		$keyfile = fopen("weather.key", "r") or die("<h1>Greška: Nije moguće otvoriti API ključ!</h1>");
+		$key = fread($keyfile, filesize("weather.key"));
+		fclose($keyfile);
 
-		// Pošto WU vraća opis na ćirilici, a želim da budem perfekcionista i održim celu 
-		// aplikaciju na latinici, čekalo me je žestoko (i delimično nepotrebno) kucanje
+		// WUnderground API URL
+		$apiURL = "http://api.wunderground.com/api/".intval($key)."/conditions/lang:SR/q/Serbia/Nis.xml";
+
+		// Pošto WU vraća opis na ćirilici, a želim da budem perfekcionista i održim
+		// celu aplikaciju na latinici, čekalo me je žestoko (i delimično nepotrebno) kucanje
 		$cyr  = array('а','б','в','г','д','ђ','е','ж','з','и','ј','к','л','љ',
 				'м','н','њ','о','п','р','с','т','ћ','у','ф','х','ц','ч','џ','ш', 					
 				'А','Б','В','Г','Д','Ђ','Е','Ж','З','И','Ј','К','Л','Љ',
@@ -26,10 +30,10 @@
 			$GLOBALS['uredjaji'][7][1] = time();
 
 			// Cuvanje trenutne temperature
-			$GLOBALS['uredjaji'][8][1] = $xml->current_observation->temp_c;
+			$GLOBALS['uredjaji'][8][1] =  $xml->current_observation->temp_c;
 			
 			// Cuvanje stringa sa opisom uslova
-			$GLOBALS['uredjaji'][9][1] = str_replace($cyr, $lat, $xml->current_observation->weather);
+			$GLOBALS['uredjaji'][9][1] =  str_replace($cyr, $lat, $xml->current_observation->weather);
 
 			// Cuvanje ikone uslova
 			$GLOBALS['uredjaji'][10][1] = $xml->current_observation->icon;

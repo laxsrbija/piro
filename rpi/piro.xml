@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<piro>
+	<uredjaj>
+		<id>led_paneli</id>
+		<status>0</status>
+	</uredjaj>
+	<uredjaj>
+		<id>led_desno</id>
+		<status>0</status>
+	</uredjaj>
+	<uredjaj>
+		<id>led_levo</id>
+		<status>1</status>
+	</uredjaj>
+	<uredjaj>
+		<id>pc_status</id>
+		<status>0</status>
+	</uredjaj>
+	<uredjaj>
+		<id>pec_status</id>
+		<status>0</status>
+	</uredjaj>
+	<uredjaj>
+		<id>pec_temperatura</id>
+		<status>22.5</status>
+	</uredjaj>
+	<uredjaj>
+		<id>pec_mod</id>
+		<status>9</status>
+	</uredjaj>
+	<uredjaj>
+		<id>vreme_azurirano</id>
+		<status>1447336833</status>
+	</uredjaj>
+	<uredjaj>
+		<id>vreme_curr_temp</id>
+		<status>21</status>
+	</uredjaj>
+	<uredjaj>
+		<id>vreme_stanje</id>
+		<status>Vedro</status>
+	</uredjaj>
+	<uredjaj>
+		<id>vreme_ikona</id>
+		<status>clear</status>
+	</uredjaj>
+</piro>
