@@ -5,8 +5,8 @@
 		$key = "API";
 		$apiURL = "http://api.wunderground.com/api/$key/conditions/lang:SR/q/Serbia/Nis.xml";
 
-		// Pošto WU vraća opis na ćirilici, a želim da budem perfekcionista i održim
-		// celu aplikaciju na latinici, čekalo me je žestoko (i delimično nepotrebno) kucanje
+		// Pošto WU vraća opis na ćirilici, a želim da budem perfekcionista i održim celu 
+		// aplikaciju na latinici, čekalo me je žestoko (i delimično nepotrebno) kucanje
 		$cyr  = array('а','б','в','г','д','ђ','е','ж','з','и','ј','к','л','љ',
 				'м','н','њ','о','п','р','с','т','ћ','у','ф','х','ц','ч','џ','ш', 					
 				'А','Б','В','Г','Д','Ђ','Е','Ж','З','И','Ј','К','Л','Љ',
