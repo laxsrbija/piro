@@ -2,6 +2,8 @@
 	require ("manipulator.php");
 	require ("thermal-control.php");
 	require ("relay-control.php");
+	require ("weather.php");
+	require ("shell-comands.php");
 
 	// piro-querry.php?f=ASD&arg=99
 
