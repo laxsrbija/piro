@@ -41,5 +41,17 @@
 		case "toggleRelay":
 			toggleRelay($arg);
 			break;
+		case "azurirajVreme":
+			azurirajVreme($arg);
+			break;
+		case "getWTemp":
+			getWTemp();
+			break;
+		case "getDesc":
+			getDesc();
+			break;
+		case "getIcon":
+			getIcon();
+			break;
 	}
 ?>
