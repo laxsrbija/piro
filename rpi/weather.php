@@ -1,6 +1,8 @@
 <?php
 
-	function azurirajVreme() {
+	// Argument koji funkcija uzima može biti "force".
+	// U tom slucaju se vreme ažurira čak i kada je prošlo manje od 15 minuta od poslednje provere
+	function azurirajVreme($a) {
 		// Otvaranje datoteke sa WU API ključem
 		$keyfile = fopen("weather.key", "r") or die("<h1>Greška: Nije moguće otvoriti API ključ!</h1>");
 		$key = fread($keyfile, filesize("weather.key"));
@@ -21,9 +23,9 @@
 				'A','B','V','G','D','Đ','E','Ž','Z','I','J','K','L','Lj',
 				'M','N','Nj','O','P','R','S','T','Ć','U','F','H','C','Č','Dž','Š');
 		
-		// Kako ne bi došlo da prekoračenja upotrebe API zahteva,
+		// Kako ne bi došlo do prekoračenja upotrebe API zahteva,
 		// vreme se ažurira jednom u 15 minuta
-		if (time() - $GLOBALS['uredjaji'][7][1] >= 900) {
+		if (time() - $GLOBALS['uredjaji'][7][1] >= 900 || $a = "force") {
 			$xml = simplexml_load_file($apiURL);
 			
 			// Cuvanje trenutnog vremena
