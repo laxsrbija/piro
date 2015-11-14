@@ -38,7 +38,7 @@
 			toggle();
 			break;
 		case "getRelayStatus":
-			getRelayStatus($arg);
+			echo getRelayStatus($arg);
 			break;
 		case "toggleRelay":
 			toggleRelay($arg);

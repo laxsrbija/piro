@@ -8,6 +8,6 @@ document.onreadystatechange = function () {
 			document.getElementById('interactive');
 			document.getElementById('load').style.visibility="hidden";
 			document.getElementById('tst').style.visibility="visible";
-		}, 650);
+		}, 1000);
 	}
 }
