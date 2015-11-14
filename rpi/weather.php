@@ -25,7 +25,7 @@
 		
 		// Kako ne bi došlo do prekoračenja upotrebe API zahteva,
 		// vreme se ažurira jednom u 15 minuta
-		if (time() - $GLOBALS['uredjaji'][7][1] >= 900 || $a = "force") {
+		if (time() - $GLOBALS['uredjaji'][7][1] >= 900) {
 			$xml = simplexml_load_file($apiURL);
 			
 			// Cuvanje trenutnog vremena
@@ -35,7 +35,8 @@
 			$GLOBALS['uredjaji'][8][1] =  $xml->current_observation->temp_c;
 			
 			// Cuvanje stringa sa opisom uslova
-			$GLOBALS['uredjaji'][9][1] =  str_replace($cyr, $lat, $xml->current_observation->weather);
+			$temp = str_replace($cyr, $lat, $xml->current_observation->weather);
+			$GLOBALS['uredjaji'][9][1] =  str_replace("Malo", "Mestimično", $temp);
 
 			// Cuvanje ikone uslova
 			$GLOBALS['uredjaji'][10][1] = $xml->current_observation->icon;

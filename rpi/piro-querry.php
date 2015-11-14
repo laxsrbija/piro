@@ -3,13 +3,13 @@
 	require ("thermal-control.php");
 	require ("relay-control.php");
 	require ("weather.php");
-	require ("shell-comands.php");
+	require ("shell-commands.php");
 
 	// piro-querry.php?f=ASD&arg=99
 
 	// Preuzimanje parametra i argumenta iz URL adrese
 	$q = $_REQUEST["f"];
-	$arg = intval($_REQUEST["arg"]);
+	$arg = $_REQUEST["arg"];
 
 	// NOTE: Svaka izmena funkcija u posebnim 
 	// modulima mora biti primenjena i ovde!
@@ -47,13 +47,13 @@
 			azurirajVreme($arg);
 			break;
 		case "getWTemp":
-			getWTemp();
+			echo getWTemp();
 			break;
 		case "getDesc":
-			getDesc();
+			echo getDesc();
 			break;
 		case "getIcon":
-			getIcon();
+			echo getIcon();
 			break;
 	}
 ?>

@@ -1,45 +1,39 @@
+// Osnovna funkcija za komuniciranje sa PHP datotekama
+function piroQuerry(q, arg, callback) {
+	var xmlhttp = new XMLHttpRequest();
 
-//////////////// OSNOVNE FUNKCIJE ////////////////
+	xmlhttp.open("GET", "rpi/piro-querry.php?f=" + q + "&arg=" + arg, true);
+	
+	xmlhttp.onreadystatechange = function() {
+		if (xmlhttp.readyState == 4 && xmlhttp.status == 200 && typeof callback == "function")
+			callback.apply(xmlhttp);
+	}
 
-function piroQuerryAD(q, arg, dv) {
-    if (q.length == 0 || arg.length == 0) 
-        return;
-    else {
-        var xmlhttp = new XMLHttpRequest();
-
-        xmlhttp.open("GET", "rpi/piro-querry.php?f=" + q + "&arg=" + arg, true);
-        xmlhttp.send();
-
-		xmlhttp.onreadystatechange = function() {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200 && dv != "") {
-				document.getElementById(dv).innerHTML = xmlhttp.responseText;
-            }
-        };
-    }
+	xmlhttp.send();
 }
 
-function piroQuerryA(q, arg) {
-    return piroQuerryAD(q, arg, "");
+// Funkcija za učitavanje vremena
+function ucitajVreme(arg) {
+	piroQuerry("azurirajVreme", arg, "-1");
+
+	setTimeout(function(){
+    
+		piroQuerry("getWTemp", "-1", function() {
+				document.getElementById("temperatura").innerHTML = this.responseText;
+			}
+		);
+
+		piroQuerry("getIcon", "-1", function() {
+				document.getElementById("slikaTemperatura").src = "img/weather-icons/" + this.responseText + ".gif";
+			}
+		);
+
+		piroQuerry("getDesc", "-1", function() {
+				document.getElementById("tekst").innerHTML = this.responseText;
+			}
+		);
+
+	}, 650);
+	
+
 }
-
-function piroQuerry(q) {
-    return piroQuerryAD(q, -1, "");
-}
-
-function piroQuerryD(q, dv) {
-    return piroQuerryAD(q, -1, dv);
-}
-
-//////////////////////////////////////////////////
-
-function getTemp() {
-	piroQuerryD("getMode", "tst");
-}
-
-function setTemp() {
-	var t = parseInt(prompt("Unesi novu temperaturu:",""));
-	piroQuerryA("setMode", t);
-	piroQuerryD("getMode", "tst");
-}
-
-
