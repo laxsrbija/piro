@@ -30,18 +30,18 @@
 	</uredjaj>
 	<uredjaj>
 		<id>vreme_azurirano</id>
-		<status>1447523202</status>
+		<status>1447545327</status>
 	</uredjaj>
 	<uredjaj>
 		<id>vreme_curr_temp</id>
-		<status>13</status>
+		<status>5</status>
 	</uredjaj>
 	<uredjaj>
 		<id>vreme_stanje</id>
-		<status>Mestimično oblačno</status>
+		<status>Vedro</status>
 	</uredjaj>
 	<uredjaj>
 		<id>vreme_ikona</id>
-		<status>partlycloudy</status>
+		<status>clear</status>
 	</uredjaj>
 </piro>

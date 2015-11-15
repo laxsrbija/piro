@@ -1,0 +1,30 @@
+body {
+	background: url("../img/bg.png");
+}
+
+#nav {
+	position: absolute;
+	background-color: #291b1a;
+    height: 50px;
+    left: 0;
+    top: 0;
+    width: 100%;
+	opacity: 0.9;
+}
+
+#kontejner {
+	margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+}
+
+#test {
+	display: inline-block;
+	width: 260px;
+	height: 140px;
+	background-color: #efe1e1;
+	opacity: 0.9;
+}
