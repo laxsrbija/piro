@@ -1,6 +1,12 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500,100&subset=latin,latin-ext);
+
+/*  TELO  */
+
 body {
 	background: url("../img/bg.png");
 }
+
+/*  NAVIGACIJA  */
 
 #nav {
 	position: absolute;
@@ -9,7 +15,21 @@ body {
     left: 0;
     top: 0;
     width: 100%;
-	opacity: 0.9;
+}
+
+#logo-nav {
+		position: relative;
+		top: 6px;
+		left: 15px;
+}
+
+/*  KONTEJNER  */
+
+.razmak {
+	display: inline-block;
+	height: 350px;
+	width: 0px;
+	margin: 0px;
 }
 
 #kontejner {
@@ -21,10 +41,91 @@ body {
     transform: translate(-50%, -50%)
 }
 
-#test {
+#kontejner div {
+	position: relative;
 	display: inline-block;
-	width: 260px;
-	height: 140px;
+}
+
+#kontejner div span {
+	display: inline-block;
 	background-color: #efe1e1;
 	opacity: 0.9;
+	margin-left: 5px;
+	margin-bottom: 5px;
+}
+
+.prognoza {
+	position: relative;
+	width: 270px;
+	height: 250px;
+}
+
+#prognoza-ikona {
+	position: absolute;
+	top: 30px;
+	left: 35px;
+	width: 200px;
+	height: 135px;
+}
+
+#prognoza-vrednost {
+	position: absolute;
+	font-family: Roboto, sans-serif;
+	font-weight: 300;
+	color: #b82d40;
+	text-align: right;
+	font-size: 48px;
+	bottom: 10px;
+	left: 17px;
+	width: 71px;
+}
+
+#prognoza-opis {
+	position: absolute;
+	font-family: Roboto, sans-serif;
+	font-weight: 300;
+	color: #353535;
+	font-size: 16pt;
+	bottom: 35px;
+	left: 97px;
+}
+
+#prognoza-grad {
+	position: absolute;
+	font-family: Roboto, sans-serif;
+	font-weight: 300;
+	color: #353535;
+	font-size: 10pt;
+	bottom: 20px;
+	left: 97px;	
+}
+
+.autonomni-unos {
+	position: relative;
+	width: 270px;
+	height: 60px;
+}
+
+.racunar {
+	position: relative;
+	width: 270px;
+	height: 90px;
+}
+
+.rasveta {
+	position: relative;
+	width: 270px;
+	height: 220px;
+}
+
+.grejanje {
+	position: relative;
+	width: 270px;
+	height: 220px;
+}
+
+.status {
+	position: relative;
+	width: 270px;
+	height: 90px;
 }

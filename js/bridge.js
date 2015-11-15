@@ -20,17 +20,17 @@ function ucitajVreme(arg) {
 	setTimeout(function(){
     
 		piroQuerry("getWTemp", "-1", function() {
-				document.getElementById("tempVrednost").innerHTML = this.responseText;
+				document.getElementById("prognoza-vrednost").innerHTML = this.responseText + "°";
 			}
 		);
 
 		piroQuerry("getIcon", "-1", function() {
-				document.getElementById("tempSlika").src = "img/weather-icons/" + this.responseText + ".gif";
+				document.getElementById("prognoza-ikona").src = "img/weather-icons/" + this.responseText + ".png";
 			}
 		);
 
 		piroQuerry("getDesc", "-1", function() {
-				document.getElementById("tempOpis").innerHTML = this.responseText;
+				document.getElementById("prognoza-opis").innerHTML = this.responseText;
 			}
 		);
 
@@ -42,9 +42,9 @@ function ucitajVreme(arg) {
 function inicijalnoPokretanje() {
 	
 	// Poziva funkciju za učitavanje vremena
-	ucitajVreme("NULL");
+	ucitajVreme("Redovno");
 	
-	// Učitati status, temperaturu i režim rada peći
+	/*// Učitati status, temperaturu i režim rada peći
 	piroQuerry("thermalStatus", "-1", function() {
 			document.getElementById("termoStatus").innerHTML = "Status grejnog tela: " + this.responseText;
 		}
@@ -80,6 +80,6 @@ function inicijalnoPokretanje() {
 	piroQuerry("getRelayStatus", "2", function() {
 			document.getElementById("svetloLevo").innerHTML = "Status levog svetla: " + this.responseText;
 		}
-	);
+	);*/
 	
 }
