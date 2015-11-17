@@ -55,5 +55,11 @@
 		case "getIcon":
 			echo getIcon();
 			break;
+		case "getPCStatus":
+			echo getPCStatus();
+			break;
+		case "togglePC":
+			togglePC();
+			break;
 	}
 ?>

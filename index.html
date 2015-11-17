@@ -2,24 +2,48 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<meta name="title" content="PIRO - Kontrolni panel">
+		<meta name="title" content="PIRO | Kontrolni panel">
 		<meta name="author" content="Lazar Stanojević">
-		
-		<!-- 
-							
-			（╯°□°）╯︵ <ǝlqɐʇ/>						
-							
-		-->
-		
-		<title>PIRO - Kontrolni panel</title>
+		<title>PIRO | Kontrolni panel</title>
 		<link rel="stylesheet" type="text/css" href="css/piro-desktop.css">
-		<link rel="shortcut icon" type="image/x-icon" href="#">
+		<script type="text/javascript" src="js/piro.js"></script>
+		<script type="text/javascript" src="js/bridge.js"></script>
+		<link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
 	</head>
-	<body>
+	<body onLoad="inicijalnoPokretanje()">
 		<div id="nav">
+			<img src="img/logo.png" id="logo-nav">
 		</div>
-		<div id="kontejner">
-		<div id="test"></div>
+		<div id="kontejner"><br>
+			<div class="razmak"></div>
+			<div>
+				<span class="prognoza">
+					<img id="prognoza-ikona" src="#">
+					<span id="prognoza-vrednost">58°</span>
+					<span id="prognoza-opis">Sunčano</span>
+					<span id="prognoza-grad">Niš, Republika Srbija</span>
+					<a href="javascript:ucitajVreme('force')" id="prognoza-osvezi" title="Osveži"><img src="img/weather-refresh.png"></a>
+				</span>
+				<br>
+				<span class="autonomni-unos">
+					<a href="#" class="izmena-skripte">Izmena skripte za autonoman rad</a>
+				</span>
+			</div>
+			<div>
+				<span class="racunar" id="racunar-div">
+					<img id="racunar-kuler" class="racunar-kuler" src="img/fan.png">
+					<a href="javascript:racunarToggle()" id="racunar-taster" class="racunar-taster">UKLJUČI</a>
+					<span id="racunar-status">Računar je uključen.</span>
+				</span>
+				<br>
+				<span class="rasveta"></span>
+			</div>
+			<div>
+				<span class="grejanje"></span>
+				<br>
+				<span class="status"></span>
+			</div>
 		</div>
+		<div id="load"></div>
 	</body>
 </html>

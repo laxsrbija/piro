@@ -1,6 +1,20 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500,100&subset=latin,latin-ext);
+
+/*  TELO  */
+
 body {
 	background: url("../img/bg.png");
 }
+
+#load {
+	width:100%;
+    height:100%;
+    position:fixed;
+    z-index:9999;
+    background:url('../img/piro-loading.png') no-repeat center center;
+}
+
+/*  NAVIGACIJA  */
 
 #nav {
 	position: absolute;
@@ -9,7 +23,21 @@ body {
     left: 0;
     top: 0;
     width: 100%;
-	opacity: 0.9;
+}
+
+#logo-nav {
+	position: relative;
+	top: 6px;
+	left: 15px;
+}
+
+/*  KONTEJNER  */
+
+.razmak {
+	display: inline-block;
+	height: 350px;
+	width: 0px;
+	margin: 0px;
 }
 
 #kontejner {
@@ -21,10 +49,154 @@ body {
     transform: translate(-50%, -50%)
 }
 
-#test {
+#kontejner div {
+	position: relative;
 	display: inline-block;
-	width: 260px;
-	height: 140px;
-	background-color: #efe1e1;
-	opacity: 0.9;
+}
+
+#kontejner div span {
+	display: inline-block;
+	background-color: #e8d4d3;
+	margin-left: 5px;
+	margin-bottom: 5px;
+}
+
+.prognoza {
+	position: relative;
+	width: 270px;
+	height: 250px;
+}
+
+#prognoza-ikona {
+	position: absolute;
+	top: 30px;
+	left: 35px;
+	width: 200px;
+	height: 135px;
+}
+
+#prognoza-vrednost {
+	position: absolute;
+	font-family: Roboto, sans-serif;
+	font-weight: 300;
+	color: #b82d40;
+	text-align: right;
+	font-size: 48px;
+	bottom: 10px;
+	left: 17px;
+	width: 71px;
+}
+
+#prognoza-opis {
+	position: absolute;
+	font-family: Roboto, sans-serif;
+	font-weight: 300;
+	color: #353535;
+	font-size: 13.5pt;
+	bottom: 35px;
+	left: 96px;
+}
+
+#prognoza-grad {
+	position: absolute;
+	font-family: Roboto, sans-serif;
+	font-weight: 300;
+	color: #353535;
+	font-size: 10pt;
+	bottom: 20px;
+	left: 97px;	
+}
+
+#prognoza-osvezi {
+	position: absolute;
+	right: 5px;
+	top: 5px;	
+}
+
+.autonomni-unos {
+	position: relative;
+	width: 270px;
+	height: 60px;
+	background: url("../img/python-bg.png") no-repeat;
+}
+
+.izmena-skripte {
+	position: absolute;
+	display: inline-block;
+	font-family: Roboto, sans-serif;
+	color: #333333;
+	font-weight: 300;
+	text-align: center;
+	font-size: 11pt;
+	top: 0px;
+	left: 0px;
+	width: 270px;
+	height: 60px;
+	text-decoration: none;
+	padding-top: 18px;
+}
+
+.racunar {
+	position: relative;
+	width: 270px;
+	height: 90px;
+}
+
+.racunar-kuler {
+	height: 55px;
+	width: 55px;
+	margin: 0px;
+	position: absolute;
+	bottom: 20px;
+	left: 18px;
+}
+
+#racunar-status {
+	position: absolute;
+	font-family: Roboto, sans-serif;
+	font-weight: 300;
+	color: #524948;
+	font-size: 13pt;
+	bottom: 47px;
+	left: 80px;
+	width: 155px;
+	height: 22px;
+	margin: 0px;
+}
+
+.racunar-taster {
+	position: absolute;
+	bottom: 22px;
+	left: 84px;
+	font-family: Roboto, sans-serif;
+	font-weight: 400;
+	font-size: 10pt;
+	margin: 0px;
+	text-align: center;
+	color: #ffffff;
+	display: block;
+	height: 20px;
+	width: 160px;
+	padding-top: 5px;
+	background-color: #ca4a63;
+	border-radius: 6px;
+	text-decoration: none;
+}
+
+.rasveta {
+	position: relative;
+	width: 270px;
+	height: 220px;
+}
+
+.grejanje {
+	position: relative;
+	width: 270px;
+	height: 220px;
+}
+
+.status {
+	position: relative;
+	width: 270px;
+	height: 90px;
 }

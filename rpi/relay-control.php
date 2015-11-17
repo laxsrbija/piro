@@ -1,7 +1,7 @@
 <?php
 
 	// 0 - Glavni LED paneli, 1 - Desni LED paneli
-	// 2 - Levi LED paneli, 3 - PC
+	// 2 - Levi LED paneli
 
 	// Vraća stanje uređaja
 	function getRelayStatus($a) {
@@ -25,6 +25,20 @@
 			else $GLOBALS['uredjaji'][intval($a)][1] = 1;
 		}
 
+		upis();
+	}
+	
+	function getPCStatus() {
+		return intval($GLOBALS['uredjaji'][3][1]);
+	}
+	
+	function togglePC() {
+		if (getPCStatus() == 1) 
+			$GLOBALS['uredjaji'][3][1] = 0;
+		else 			
+			$GLOBALS['uredjaji'][3][1] = 1;
+		
+		// TODO Python kod za računar
 		upis();
 	}
 			
