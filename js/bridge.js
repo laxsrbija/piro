@@ -143,15 +143,15 @@ function inicijalnoPokretanje() {
 	/*// Učitati status, temperaturu i režim rada peći
 	piroQuerry("thermalStatus", "-1", function() {
 			document.getElementById("termoStatus").innerHTML = "Status grejnog tela: " + this.responseText;
-		}
-	);
+		}‚
+	);*/
 
 	piroQuerry("getTemp", "-1", function() {
-			document.getElementById("termoTemperatura").innerHTML = "Temperatura grejnog tela: " + this.responseText;
+			document.getElementById("grejanje-vrednost").innerHTML = this.responseText + "°";
 		}
 	);
 	
-	piroQuerry("getMode", "-1", function() {
+	/*piroQuerry("getMode", "-1", function() {
 			document.getElementById("termoMod").innerHTML = "Režim grejnog tela: " + this.responseText;
 		}
 	);*/
