@@ -17,12 +17,28 @@ function racunarToggle() {
 	
 	if (document.getElementById("racunar-status").innerHTML == "Računar je isključen.") {
 		document.getElementById("racunar-taster").innerHTML = "ISKLJUČI";
+		document.getElementById("racunar-taster").className = "racunar-taster ukljuceno";
 		document.getElementById("racunar-kuler").src = "img/fan-rot.gif";
 		document.getElementById("racunar-status").innerHTML = "Računar je uključen.";
 	}
 	else {
 		document.getElementById("racunar-taster").innerHTML = "UKLJUČI";
+		document.getElementById("racunar-taster").className = "racunar-taster iskljuceno";
 		document.getElementById("racunar-kuler").src = "img/fan.png";
 		document.getElementById("racunar-status").innerHTML = "Računar je isključen.";
 	}
+}
+
+function rasvetaToggle(k) {
+	piroQuerry("toggleRelay", k, "-1");
+
+	if (document.getElementById("rasv-" + k + "-taster").innerHTML == "UKLJUČI") {
+		document.getElementById("rasv-" + k + "-taster").innerHTML = "ISKLJUČI";
+		document.getElementById("rasv-" + k + "-taster").className = "rasv-" + k + "-taster ukljuceno";
+	}
+	else {
+		document.getElementById("rasv-" + k + "-taster").innerHTML = "UKLJUČI";
+		document.getElementById("rasv-" + k + "-taster").className = "rasv-" + k + "-taster iskljuceno";
+	}
+
 }

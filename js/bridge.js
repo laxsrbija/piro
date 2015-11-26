@@ -37,6 +37,26 @@ function ucitajVreme(arg) {
 			}
 		);
 
+		piroQuerry("getIconDaily", "-1", function() {
+				document.getElementById("prognoza-ikona-dnevna").src = "http://icons.wxug.com/i/c/v2/" + statusDana + this.responseText + ".svg";
+			}
+		);
+
+		piroQuerry("getMaxTemp", "-1", function() {
+				document.getElementById("prognoza-max").innerHTML = "Maksimalna: " + this.responseText + "°";
+			}
+		);
+
+		piroQuerry("getMinTemp", "-1", function() {
+				document.getElementById("prognoza-min").innerHTML = "Minimalna: " + this.responseText + "°";
+			}
+		);
+
+		piroQuerry("getPadavine", "-1", function() {
+				document.getElementById("prognoza-padavine").innerHTML = "Mogućnost padavina: " + this.responseText + "%";
+			}
+		);
+
 	}, 750);
 	
 
@@ -142,29 +162,34 @@ function inicijalnoPokretanje() {
 				document.getElementById("racunar-taster").innerHTML = "ISKLJUČI";
 				document.getElementById("racunar-kuler").src = "img/fan-rot.gif";
 				document.getElementById("racunar-status").innerHTML = "Računar je uključen.";
+				document.getElementById("racunar-taster").className = "racunar-taster ukljuceno";
 			}
 			else {
 				document.getElementById("racunar-taster").innerHTML = "UKLJUČI";
 				document.getElementById("racunar-kuler").src = "img/fan.png";
 				document.getElementById("racunar-status").innerHTML = "Računar je isključen.";
+				document.getElementById("racunar-taster").className = "racunar-taster iskljuceno";
 			}
 		}
 	);
 	
-	/*// Učitavanje statusa rasvete
-	piroQuerry("getRelayStatus", "0", function() {
-			document.getElementById("svetloGlavno").innerHTML = "Status glavnog svetla: " + this.responseText;
-		}
-	);
-
-	piroQuerry("getRelayStatus", "1", function() {
-			document.getElementById("svetloDesno").innerHTML = "Status desnog svetla: " + this.responseText;
-		}
-	);
-	
-	piroQuerry("getRelayStatus", "2", function() {
-			document.getElementById("svetloLevo").innerHTML = "Status levog svetla: " + this.responseText;
-		}
-	);*/
+	// Učitavanje statusa rasvete
+	// Kako se radi o asinhronoj funkciji, neophodno je "zamrznuti" brojač tokom trenutnog zahteva
+	// Zato se poziva funkcija sa vrednošću i kao parametrom 
+	for (var i = 0; i < 3; i++) {
+		(function(id) {
+		    piroQuerry("getRelayStatus", id, function() {
+					if (this.responseText == 1) {
+						document.getElementById("rasv-" + id + "-taster").innerHTML = "ISKLJUČI";
+						document.getElementById("rasv-" + id + "-taster").className = "rasv-" + id + "-taster ukljuceno";
+					}
+					else {
+						document.getElementById("rasv-" + id + "-taster").innerHTML = "UKLJUČI";
+						document.getElementById("rasv-" + id + "-taster").className = "rasv-" + id + "-taster iskljuceno";
+					}
+				}
+			);
+    	})(i);
+	}
 	
 }
