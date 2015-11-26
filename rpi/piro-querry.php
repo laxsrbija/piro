@@ -55,6 +55,18 @@
 		case "getIcon":
 			echo getIcon();
 			break;
+		case "getMaxTemp":
+			echo getMaxTemp();
+			break;
+		case "getMinTemp":
+			echo getMinTemp();
+			break;
+		case "getIconDaily":
+			echo getIconDaily();
+			break;
+		case "getPadavine":
+			echo getPadavine();
+			break;
 		case "getPCStatus":
 			echo getPCStatus();
 			break;

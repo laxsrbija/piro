@@ -8,8 +8,11 @@
 		$key = fread($keyfile, filesize("weather.key"));
 		fclose($keyfile);
 
-		// WUnderground API URL
+		// WUnderground API URL za trenutne uslove
 		$apiURL = "http://api.wunderground.com/api/".intval($key)."/conditions/lang:SR/q/Serbia/Nis.xml";
+
+		// WUnderground API URL za prognozu
+		$apiURLDaily = "http://api.wunderground.com/api/".intval($key)."/forecast/lang:SR/q/Serbia/Nis.xml";
 
 		// Pošto WU vraća opis na ćirilici, a želim da budem perfekcionista i održim
 		// celu aplikaciju na latinici, čekalo me je žestoko (i delimično nepotrebno) kucanje
@@ -27,9 +30,11 @@
 		// vreme se ažurira jednom u 15 minuta
 		if (time() - $GLOBALS['uredjaji'][7][1] >= 900 || strcmp($a, "force") == 0) {
 			$xml = simplexml_load_file($apiURL);
+			$xml2 = simplexml_load_file($apiURLDaily);
 
 			// Provera da li je vreme ispravno učitano
 			if (strcmp($xml->current_observation->temp_c, "") != 0) {
+
 				// Cuvanje trenutnog vremena
 				$GLOBALS['uredjaji'][7][1] = time();
 
@@ -42,6 +47,18 @@
 
 				// Cuvanje ikone uslova
 				$GLOBALS['uredjaji'][10][1] = $xml->current_observation->icon;
+
+				// Cuvanje maksimalne dnevne temperature
+				$GLOBALS['uredjaji'][11][1] = $xml2->forecast->simpleforecast->forecastdays->forecastday[0]->high->celsius;
+
+				// Cuvanje minimalne dnevne temperature
+				$GLOBALS['uredjaji'][12][1] = $xml2->forecast->simpleforecast->forecastdays->forecastday[0]->low->celsius;
+
+				// Cuvanje ikone dnevnih uslova
+				$GLOBALS['uredjaji'][13][1] = $xml2->forecast->simpleforecast->forecastdays->forecastday[0]->icon;
+
+				// Cuvanje dnevne verovatnoce padavina
+				$GLOBALS['uredjaji'][14][1] = $xml2->forecast->simpleforecast->forecastdays->forecastday[0]->pop;
 
 				upis();
 			
@@ -61,5 +78,21 @@
 	function getIcon() {
 		return $GLOBALS['uredjaji'][10][1];
 	}
-		
+
+	function getMaxTemp() {
+		return $GLOBALS['uredjaji'][11][1];
+	}
+	
+	function getMinTemp() {
+		return $GLOBALS['uredjaji'][12][1];
+	}
+
+	function getIconDaily() {
+		return $GLOBALS['uredjaji'][13][1];
+	}	
+
+	function getPadavine() {
+		return $GLOBALS['uredjaji'][14][1];
+	}
+
 ?>
