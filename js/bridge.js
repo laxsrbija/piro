@@ -128,8 +128,8 @@ function jsonSS() {
 	var zalaznoVreme = new Date();
 	zalaznoVreme.setHours(parseInt(zalazakSat)+1);
 	zalaznoVreme.setMinutes(parseInt(zalazakMinut));
-
-	if (trenutnoVreme >= izlaznoVreme && trenutnoVreme <= zalaznoVreme)
+	
+	if (trenutnoVreme.getHours() >= izlaznoVreme.getHours() && trenutnoVreme.getHours() <= zalaznoVreme.getHours() + 12)
 		return "";
 	else
 		return "nt_";
