@@ -27,8 +27,8 @@
 				'M','N','Nj','O','P','R','S','T','Ć','U','F','H','C','Č','Dž','Š');
 		
 		// Kako ne bi došlo do prekoračenja upotrebe API zahteva,
-		// vreme se ažurira jednom u 15 minuta
-		if (time() - $GLOBALS['uredjaji'][7][1] >= 900 || strcmp($a, "force") == 0) {
+		// vreme se ažurira jednom u 5 minuta
+		if (time() - $GLOBALS['uredjaji'][7][1] >= 300 || strcmp($a, "force") == 0) {
 			$xml = simplexml_load_file($apiURL);
 			$xml2 = simplexml_load_file($apiURLDaily);
 
