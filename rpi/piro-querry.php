@@ -34,8 +34,8 @@
 		case "decrement":
 			decrement();
 			break;
-		case "toggle":
-			toggle();
+		case "toggleThermal":
+			toggleThermal();
 			break;
 		case "getRelayStatus":
 			echo getRelayStatus($arg);
