@@ -314,23 +314,23 @@ body {
 #grejanje-vrednost {
 	color: #b82d40;
     font-family: Roboto,sans-serif;
-    font-size: 85px;
+    font-size: 58px;
     font-weight: 200;
     height: 60px;
-    left: 10px;
+    left: 7px;
     padding: 0;
     position: absolute;
     text-align: center;
-    top: 25px;
+    top: 50px;
     width: 250px;
 }
 
 #grejanje-tasteri {
-	position: absolute;
-	width: 250px;
-	padding-left: 14px;
 	bottom: 45px;
-	text-align: center;
+    padding-left: 22px;
+    position: absolute;
+    text-align: center;
+    width: 240px;
 }
 
 #grejanje-tasteri a {
@@ -338,7 +338,9 @@ body {
 }
 
 #grejanje-tasteri a img {
-	padding-right: 6px;
+	height: 16px;
+    padding-right: 15px;
+    width: 16px;
 }
 
 .grejanje-pojacaj, .grejanje-smanji {
