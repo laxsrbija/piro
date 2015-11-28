@@ -42,3 +42,70 @@ function rasvetaToggle(k) {
 	}
 
 }
+
+// Učitati status i  temperaturu peći 
+function ucitajTempStatus() {
+	piroQuerry("thermalStatus", "-1", function() {
+			if (this.responseText == 0) {
+				document.getElementById("grejanje-vrednost").innerHTML = "Isklj.";
+				
+				for (var i = 1; i <= 5; i++)
+					document.getElementById("grejanje-" + i + "-taster").src = "img/grejanje-" + i + ".png";
+			}
+			else {
+				piroQuerry("getTemp", "-1", function() {
+						document.getElementById("grejanje-vrednost").innerHTML = this.responseText + "°";
+						getThermalMode();
+					}
+				);
+			}
+		}
+	);
+}
+
+// Paljenje i gašenje grejnog tela
+function grejanjeToggle() {
+	piroQuerry("toggleThermal", "-1", function() {
+		ucitajTempStatus();
+	});
+}
+
+// Učitavanje režima rada
+function getThermalMode() {
+	piroQuerry("getMode", "-1", function() {
+			for (var i = 1; i <= 5; i++)
+				document.getElementById("grejanje-" + i + "-taster").src = "img/grejanje-" + i + ".png";
+
+			document.getElementById("grejanje-" + (parseInt(this.responseText) + 1) + "-taster").src = "img/grejanje-" + (parseInt(this.responseText) + 1) + "-s.png";
+		}
+	);
+}
+
+// Postavljanje režima rada
+function setThermalMode(arg) {
+	if (document.getElementById("grejanje-vrednost").innerHTML != "Isklj.")
+		piroQuerry("setMode", arg, function() {	
+			getThermalMode(); 
+			ucitajTempStatus();	
+		});
+}
+
+// Inkrementacija temperature
+function povecajTemperaturu() {
+	if (document.getElementById("grejanje-vrednost").innerHTML != "Isklj.")
+		piroQuerry("increment", "-1", function() {
+				ucitajTempStatus();
+				setThermalMode(1);
+			}
+		);
+}
+
+// Dekrementacija temperature
+function smanjiTemperaturu() {
+	if (document.getElementById("grejanje-vrednost").innerHTML != "Isklj.")
+		piroQuerry("decrement", "-1", function() {
+				ucitajTempStatus();
+				setThermalMode(1);
+			}
+		);
+}

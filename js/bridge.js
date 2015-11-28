@@ -140,21 +140,17 @@ function inicijalnoPokretanje() {
 	// Poziva funkciju za učitavanje vremena
 	ucitajVreme("Redovno");
 	
-	/*// Učitati status, temperaturu i režim rada peći
-	piroQuerry("thermalStatus", "-1", function() {
-			document.getElementById("termoStatus").innerHTML = "Status grejnog tela: " + this.responseText;
-		}‚
-	);*/
+	// Učitati status i  temperaturu peći 
+	ucitajTempStatus();
+	
+	// Učitava režim rada peći
+	piroQuerry("getMode", "-1", function() {
+			for (var i = 1; i <= 5; i++)
+				document.getElementById("grejanje-" + i + "-taster").src = "img/grejanje-" + i + ".png";
 
-	piroQuerry("getTemp", "-1", function() {
-			document.getElementById("grejanje-vrednost").innerHTML = this.responseText + "°";
+			document.getElementById("grejanje-" + (parseInt(this.responseText) + 1) + "-taster").src = "img/grejanje-" + (this.responseText + 1) + "-s.png";
 		}
 	);
-	
-	/*piroQuerry("getMode", "-1", function() {
-			document.getElementById("termoMod").innerHTML = "Režim grejnog tela: " + this.responseText;
-		}
-	);*/
 	
 	// Učitati status računara
 	piroQuerry("getPCStatus", "-1", function() {

@@ -4,6 +4,7 @@
 		<meta charset="UTF-8">
 		<meta name="title" content="PIRO | Kontrolni panel">
 		<meta name="author" content="Lazar Stanojević">
+		<meta name="robots" content="noindex, nofollow">
 		<title>PIRO | Kontrolni panel</title>
 		<link rel="stylesheet" type="text/css" href="css/piro-desktop.css">
 		<script type="text/javascript" src="js/piro.js"></script>
@@ -53,15 +54,15 @@
 				<span class="grejanje">
 					<span id="grejanje-vrednost">--°</span>
 					<span id="grejanje-tasteri">
-						<a href="#"><img id="grejanje-1-taster" src="img/grejanje-auto.png"></a>
-						<a href="#"><img id="grejanje-2-taster" src="img/grejanje-manual.png"></a>
-						<a href="#"><img id="grejanje-3-taster" src="img/grejanje-sunce.png"></a>
-						<a href="#"><img id="grejanje-4-taster" src="img/grejanje-mesec.png"></a>
-						<a href="#"><img id="grejanje-5-taster" src="img/grejanje-led.png"></a>
+						<a href="#"><img id="grejanje-1-taster" src="img/grejanje-1.png"></a>
+						<a href="#"><img id="grejanje-2-taster" src="img/grejanje-2.png"></a>
+						<a href="javascript:setThermalMode(2)"><img id="grejanje-3-taster" src="img/grejanje-3.png"></a>
+						<a href="javascript:setThermalMode(3)"><img id="grejanje-4-taster" src="img/grejanje-4.png"></a>
+						<a href="javascript:setThermalMode(4)"><img id="grejanje-5-taster" src="img/grejanje-5.png"></a>
 					</span>
-					<a class="grejanje-pojacaj" href="#"><img src="img/grejanje-inkrementacija.png"></a>
-					<a class="grejanje-snaga" href="#"><img src="img/grejanje-pwr.png"></a>
-					<a class="grejanje-smanji" href="#"><img src="img/grejanje-dekrementacija.png"></a>
+					<a class="grejanje-pojacaj" href="javascript:povecajTemperaturu()"><img src="img/grejanje-inkrementacija.png"></a>
+					<a class="grejanje-snaga" href="javascript:grejanjeToggle()"><img src="img/grejanje-pwr.png"></a>
+					<a class="grejanje-smanji" href="javascript:smanjiTemperaturu()"><img src="img/grejanje-dekrementacija.png"></a>
 				</span>
 				<br>
 				<span class="status"></span>
