@@ -9,7 +9,7 @@
 	}
 
 	function toggleRelay($a) {
-		if ($a != 1) { // TODO Kako relej za desne panele još uvek nije dostupan
+		if ($a != 2) { // TODO Kako relej za leve panele još uvek nije dostupan
 					   // koristi se dati kod da preskoči njegove kontrole
 			if (getRelayStatus($a) == 1) {
 				$GLOBALS['uredjaji'][intval($a)][1] = 0;
