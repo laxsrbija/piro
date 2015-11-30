@@ -148,7 +148,7 @@ function inicijalnoPokretanje() {
 			for (var i = 1; i <= 5; i++)
 				document.getElementById("grejanje-" + i + "-taster").src = "img/grejanje-" + i + ".png";
 
-			document.getElementById("grejanje-" + (parseInt(this.responseText) + 1) + "-taster").src = "img/grejanje-" + (this.responseText + 1) + "-s.png";
+			document.getElementById("grejanje-" + (parseInt(this.responseText + 1)) + "-taster").src = "img/grejanje-" + (parseInt(this.responseText + 1)) + "-s.png";
 		}
 	);
 	

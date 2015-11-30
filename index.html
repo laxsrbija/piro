@@ -9,6 +9,8 @@
 		<link rel="stylesheet" type="text/css" href="css/piro-desktop.css">
 		<script type="text/javascript" src="js/piro.js"></script>
 		<script type="text/javascript" src="js/bridge.js"></script>
+		<script src="dist/sweetalert.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
 		<link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
 	</head>
 	<body onLoad="inicijalnoPokretanje()">
@@ -65,7 +67,14 @@
 					<a class="grejanje-smanji" href="javascript:smanjiTemperaturu()"><img src="img/grejanje-dekrementacija.png"></a>
 				</span>
 				<br>
-				<span class="status"></span>
+				<span class="status">
+					<img id="status-icon" src="#">
+					<span id="status-status">Svi servisi su dostupni</span>
+					<span id="status-uptime">Operativno vreme sistema: 27 dana</span>
+					<span id="status-temperatura">Temperatura servera: 39°C</span>
+					<span id="status-resursi">Upotreba memorije: 218 MB</span>
+					<span id="status-oprterecenje">Prosečno opterećenje servera: 14%</span>
+				</span>
 			</div>
 		</div>
 		<div id="load"></div>
