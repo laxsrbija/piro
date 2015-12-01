@@ -421,3 +421,41 @@ body {
 	width: 270px;
 	height: 140px;
 }
+
+#status-icon {
+	position: absolute;
+	left: 20px;
+	top: 18px;
+}
+
+.status-tekst {
+	position: absolute;
+	color: #353535;
+    font-family: Roboto,sans-serif;
+    font-size: 10.5pt;
+    font-weight: 300;
+    left: 20px;
+}
+
+#status-status {
+	color: #353535;
+    font-family: Roboto,sans-serif;
+    font-size: 12pt;
+    font-weight: 300;
+    left: 50px;
+    position: absolute;
+    top: 20px;
+    width: 180px;
+}
+
+#status-uptime {
+	top: 55px;
+}
+
+#status-temperatura {
+	top: 80px;
+}
+
+#status-opterecenje {
+    top: 102px;
+}
