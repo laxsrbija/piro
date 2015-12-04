@@ -74,5 +74,14 @@
 		case "togglePC":
 			togglePC();
 			break;
+		case "getShellTemp":
+			echo getShellTemp();
+			break;
+		case "getUptime":
+			echo getUptime();
+			break;
+		case "getLoadAvg":
+			echo getLoadAvg();
+			break;
 	}
 ?>
