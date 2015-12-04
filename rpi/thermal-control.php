@@ -1,10 +1,5 @@
 <?php
 
-	// Globalne promenljive sa vrednošću temperatura
-	$TEMP_DNEVNA = 21.5;
-	$TEMP_NOCNA = 19.5;
-	$TEMP_ODRZAVANJE = 7;
-
 	// Vraća stanje grejnog tela
 	function thermalStatus() {
 		return intval($GLOBALS['uredjaji'][4][1]);
@@ -26,11 +21,11 @@
 	function setMode($a) {
 
 		if ($a == 2)
-			setTemp($GLOBALS['TEMP_DNEVNA']);
+			setTemp(floatval(TEMP_DNEVNA));
 		else if ($a == 3)
-			setTemp($GLOBALS['TEMP_NOCNA']);
+			setTemp(floatval(TEMP_NOCNA));
 		else if ($a == 4)
-			setTemp($GLOBALS['TEMP_ODRZAVANJE']);
+			setTemp(intval(TEMP_ODRZAVANJE));
 
 		$GLOBALS['uredjaji'][6][1] = intval($a);
 		upis();

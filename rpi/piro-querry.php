@@ -1,4 +1,5 @@
 <?php
+	require ("piro-config.php");
 	require ("manipulator.php");
 	require ("thermal-control.php");
 	require ("relay-control.php");

@@ -1,18 +1,14 @@
 <?php
 
 	// Argument koji funkcija uzima može biti "force".
-	// U tom slucaju se vreme ažurira čak i kada je prošlo manje od 15 minuta od poslednje provere
+	// U tom slucaju se vreme ažurira čak i kada je prošlo manje od 5 minuta od poslednje provere
 	function azurirajVreme($a) {
-		// Otvaranje datoteke sa WU API ključem
-		$keyfile = fopen("weather.key", "r") or die("<h1>Greška: Nije moguće otvoriti API ključ!</h1>");
-		$key = fread($keyfile, filesize("weather.key"));
-		fclose($keyfile);
 
 		// WUnderground API URL za trenutne uslove
-		$apiURL = "http://api.wunderground.com/api/".intval($key)."/conditions/lang:SR/q/Serbia/Nis.xml";
+		$apiURL = "http://api.wunderground.com/api/".WU_API_KEY."/conditions/lang:SR/q/Serbia/Nis.xml";
 
 		// WUnderground API URL za prognozu
-		$apiURLDaily = "http://api.wunderground.com/api/".intval($key)."/forecast/lang:SR/q/Serbia/Nis.xml";
+		$apiURLDaily = "http://api.wunderground.com/api/".WU_API_KEY."/forecast/lang:SR/q/Serbia/Nis.xml";
 
 		// Pošto WU vraća opis na ćirilici, a želim da budem perfekcionista i održim
 		// celu aplikaciju na latinici, čekalo me je žestoko (i delimično nepotrebno) kucanje
@@ -28,7 +24,7 @@
 		
 		// Kako ne bi došlo do prekoračenja upotrebe API zahteva,
 		// vreme se ažurira jednom u 5 minuta
-		if (time() - $GLOBALS['uredjaji'][7][1] >= 300 || strcmp($a, "force") == 0) {
+		if (time() - intval($GLOBALS['uredjaji'][7][1]) >= 300 || strcmp($a, "force") == 0) {
 			$xml = simplexml_load_file($apiURL);
 			$xml2 = simplexml_load_file($apiURLDaily);
 
