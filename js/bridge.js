@@ -135,11 +135,8 @@ function jsonSS() {
 		return "nt_";
 }
 
-function inicijalnoPokretanje() {
-	
-	// Poziva funkciju za učitavanje vremena
-	ucitajVreme("Redovno");
-	
+function lokalniUredjaji() {
+
 	// Učitati status i  temperaturu peći 
 	ucitajTempStatus();
 	
@@ -148,7 +145,7 @@ function inicijalnoPokretanje() {
 			for (var i = 1; i <= 5; i++)
 				document.getElementById("grejanje-" + i + "-taster").src = "img/grejanje-" + i + ".png";
 
-			document.getElementById("grejanje-" + (parseInt(this.responseText + 1)) + "-taster").src = "img/grejanje-" + (parseInt(this.responseText + 1)) + "-s.png";
+			document.getElementById("grejanje-" + (parseInt(this.responseText) + 1) + "-taster").src = "img/grejanje-" + (parseInt(this.responseText) + 1) + "-s.png";
 		}
 	);
 	
@@ -187,5 +184,41 @@ function inicijalnoPokretanje() {
 			);
     	})(i);
 	}
+
+	// Učitava temperaturu sistema
+	piroQuerry("getShellTemp", "-1", function() {
+			document.getElementById("status-temperatura").innerHTML = "Temperatura servera: " + this.responseText + "°C";
+		}
+	);
+
+	// Učitava temperaturu sistema
+	piroQuerry("getUptime", "-1", function() {
+			if (this.responseText.lastIndexOf(":") == -1) {
+				document.getElementById("status-uptime").innerHTML = "Operativno vreme: " + this.responseText + " dan";
+				if (this.responseText[this.responseText.length-1] != "0")
+					document.getElementById("status-uptime").innerHTML += "a"; 
+			}
+			else
+				document.getElementById("status-uptime").innerHTML = "Server je pokrenut danas.";
+		}
+	);
+
+	piroQuerry("getLoadAvg", "-1", function() {
+			document.getElementById("status-opterecenje").innerHTML = "Prosečno opterećenje servera: " + parseInt(this.responseText) + "%";
+		}
+	);
+
+}
+
+function inicijalnoPokretanje() {
+	
+	// Poziva funkciju za učitavanje vremena
+	ucitajVreme("Redovno");
+
+	lokalniUredjaji();
+
+	// Pokušaj automatskog ažuriranja statusa
+	// Nije se pokazao uspešnim
+	//setInterval(lokalniUredjaji, 5000);
 	
 }
