@@ -65,71 +65,10 @@ function ucitajVreme(arg) {
 // Proverava da li je zašlo sunce
 // Vraća "nt_" ukoliko jeste, ili "" ako nije
 function jsonSS() {
-	var xmlHttp = new XMLHttpRequest();
-
-	if (xmlHttp != null) {
-		xmlHttp.open("GET", "http://api.sunrise-sunset.org/json?lat=43.3209022&lng=21.8957589", false);
-		xmlHttp.send();
-	}
-	
-	var json = JSON.parse(xmlHttp.responseText);
-	var izlazak = json.results.sunrise;
-	var zalazak = json.results.sunset;
-	
-	var izlazakSat, izlazakMinut, zalazakSat, zalazakMinut;
-	izlazakSat = izlazakMinut = zalazakSat = zalazakMinut = "";
-	
-	var i = 0;
-	while (i < izlazak.length) {
-		if (izlazak[i] == ':') {
-			i++;
-			break;
-		}
-		else
-			izlazakSat += izlazak[i];
-		i++;
-	}	
-	
-	while (i < izlazak.length) {
-		if (izlazak[i] == ':')
-			break;
-		else
-			izlazakMinut += izlazak[i];
-		i++;
-	}
-	
-	i = 0;
-	while (i < zalazak.length) {
-		if (zalazak[i] == ':') {
-			i++;
-			break;
-		}
-		else
-			zalazakSat += zalazak[i];
-		i++;
-	}	
-	
-	while (i < zalazak.length) {
-		if (zalazak[i] == ':')
-			break;
-		else
-			zalazakMinut += zalazak[i];
-		i++;
-	}
-	
 	var trenutnoVreme = new Date();
+	var objekatSS = new SunriseSunset(trenutnoVreme.getUTCFullYear(), trenutnoVreme.getUTCMonth(), trenutnoVreme.getUTCDate(), 43.310383, 21.868767);
 	
-	// Konstruisanje Date objekta na osnovu dobijenih podataka za izlazak i zalazak
-	// Dodaje se jedan sat zbog GMT+1 vremenske zone
-	var izlaznoVreme = new Date();
-	izlaznoVreme.setHours(parseInt(izlazakSat)+1);
-	izlaznoVreme.setMinutes(parseInt(izlazakMinut));
-	
-	var zalaznoVreme = new Date();
-	zalaznoVreme.setHours(parseInt(zalazakSat)+1);
-	zalaznoVreme.setMinutes(parseInt(zalazakMinut));
-	
-	if (trenutnoVreme.getHours() >= izlaznoVreme.getHours() && trenutnoVreme.getHours() <= zalaznoVreme.getHours() + 12)
+	if (trenutnoVreme.getHours() >= objekatSS.sunriseLocalHours(1) && trenutnoVreme.getHours() <= objekatSS.sunsetLocalHours(1))
 		return "";
 	else
 		return "nt_";
