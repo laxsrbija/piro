@@ -16,13 +16,16 @@ function piroQuerry(q, arg, callback) {
 function ucitajVreme(arg) {
 	piroQuerry("azurirajVreme", arg, function() {
 
+		var statusDana = jsonSS();
+
 		piroQuerry("getWTemp", "-1", function() {
 				document.getElementById("prognoza-vrednost").innerHTML = this.responseText + "°";
 			}
 		);
 
 		piroQuerry("getIcon", "-1", function() {
-				document.getElementById("prognoza-ikona").src = "http://icons.wxug.com/i/c/v2/" + statusDana + this.responseText + ".svg";
+				document.getElementById("prognoza-ikona").src = "http://icons.wxug.com/i/c/v2/"
+				+ statusDana + this.responseText + ".svg";
 			}
 		);
 
@@ -32,7 +35,8 @@ function ucitajVreme(arg) {
 		);
 
 		piroQuerry("getIconDaily", "-1", function() {
-				document.getElementById("prognoza-ikona-dnevna").src = "http://icons.wxug.com/i/c/v2/" + jsonSS() + this.responseText + ".svg";
+				document.getElementById("prognoza-ikona-dnevna").src = "http://icons.wxug.com/i/c/v2/"
+				+ statusDana + this.responseText + ".svg";
 			}
 		);
 
@@ -59,9 +63,11 @@ function ucitajVreme(arg) {
 // Vraća "nt_" ukoliko jeste, ili "" ako nije
 function jsonSS() {
 	var trenutnoVreme = new Date();
-	var objekatSS = new SunriseSunset(trenutnoVreme.getUTCFullYear(), trenutnoVreme.getUTCMonth(), trenutnoVreme.getUTCDate(), 43.310383, 21.868767);
+	var objekatSS = new SunriseSunset(trenutnoVreme.getUTCFullYear(),
+		trenutnoVreme.getUTCMonth(), trenutnoVreme.getUTCDate(), 43.310383, 21.868767);
 
-	if (trenutnoVreme.getHours() >= objekatSS.sunriseLocalHours(1) && trenutnoVreme.getHours() <= objekatSS.sunsetLocalHours(1))
+	if (trenutnoVreme.getHours() >= objekatSS.sunriseLocalHours(1)
+		&& trenutnoVreme.getHours() <= objekatSS.sunsetLocalHours(1))
 		return "";
 	else
 		return "nt_";
@@ -77,7 +83,8 @@ function lokalniUredjaji() {
 			for (var i = 1; i <= 5; i++)
 				document.getElementById("grejanje-" + i + "-taster").src = "img/grejanje-" + i + ".png";
 
-			document.getElementById("grejanje-" + (parseInt(this.responseText) + 1) + "-taster").src = "img/grejanje-" + (parseInt(this.responseText) + 1) + "-s.png";
+			document.getElementById("grejanje-" + (parseInt(this.responseText) + 1)
+				+ "-taster").src = "img/grejanje-" + (parseInt(this.responseText) + 1) + "-s.png";
 		}
 	);
 
@@ -136,7 +143,8 @@ function lokalniUredjaji() {
 	);
 
 	piroQuerry("getLoadAvg", "-1", function() {
-			document.getElementById("status-opterecenje").innerHTML = "Prosečno opterećenje servera: " + parseInt(this.responseText) + "%";
+			document.getElementById("status-opterecenje").innerHTML =
+				"Prosečno opterećenje servera: " + parseInt(this.responseText) + "%";
 		}
 	);
 
