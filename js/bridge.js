@@ -130,7 +130,7 @@ function lokalniUredjaji() {
 	piroQuerry("getUptime", "-1", function() {
 			if (this.responseText.lastIndexOf(":") == -1) {
 				document.getElementById("status-uptime").innerHTML = "Operativno vreme: " + this.responseText + " dan";
-				if (this.responseText[this.responseText.length-1] != "0")
+				if (this.responseText[this.responseText.length-1] != "1") 
 					document.getElementById("status-uptime").innerHTML += "a"; 
 			}
 			else
