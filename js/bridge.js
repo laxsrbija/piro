@@ -18,11 +18,6 @@ function piroQuerry(q, arg, callback) {
 // Funkcija za učitavanje vremena
 function ucitajVreme(arg) {
 	piroQuerry("azurirajVreme", arg, function() {
-		console.log(this.responseText);
-	});
-
-	// Čekanje 1000ms zbog WU API
-	setTimeout(function(){
     
 		piroQuerry("getWTemp", "-1", function() {
 				document.getElementById("prognoza-vrednost").innerHTML = this.responseText + "°";
@@ -58,9 +53,8 @@ function ucitajVreme(arg) {
 				document.getElementById("prognoza-padavine").innerHTML = "Mogućnost padavina: " + this.responseText + "%";
 			}
 		);
-
-	}, 750);
-	
+		
+	});	
 
 }
 
