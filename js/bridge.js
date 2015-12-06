@@ -1,12 +1,9 @@
-// Globalna promenljive koja čuva rezultat funkcije jsonSS()
-var statusDana = jsonSS();
-
 // Osnovna funkcija za komuniciranje sa PHP datotekama
 function piroQuerry(q, arg, callback) {
 	var xmlhttp = new XMLHttpRequest();
 
 	xmlhttp.open("GET", "rpi/piro-querry.php?f=" + q + "&arg=" + arg, true);
-	
+
 	xmlhttp.onreadystatechange = function() {
 		if (xmlhttp.readyState == 4 && xmlhttp.status == 200 && typeof callback == "function")
 			callback.apply(xmlhttp);
@@ -18,7 +15,7 @@ function piroQuerry(q, arg, callback) {
 // Funkcija za učitavanje vremena
 function ucitajVreme(arg) {
 	piroQuerry("azurirajVreme", arg, function() {
-    
+
 		piroQuerry("getWTemp", "-1", function() {
 				document.getElementById("prognoza-vrednost").innerHTML = this.responseText + "°";
 			}
@@ -35,7 +32,7 @@ function ucitajVreme(arg) {
 		);
 
 		piroQuerry("getIconDaily", "-1", function() {
-				document.getElementById("prognoza-ikona-dnevna").src = "http://icons.wxug.com/i/c/v2/" + statusDana + this.responseText + ".svg";
+				document.getElementById("prognoza-ikona-dnevna").src = "http://icons.wxug.com/i/c/v2/" + jsonSS() + this.responseText + ".svg";
 			}
 		);
 
@@ -53,8 +50,8 @@ function ucitajVreme(arg) {
 				document.getElementById("prognoza-padavine").innerHTML = "Mogućnost padavina: " + this.responseText + "%";
 			}
 		);
-		
-	});	
+
+	});
 
 }
 
@@ -63,7 +60,7 @@ function ucitajVreme(arg) {
 function jsonSS() {
 	var trenutnoVreme = new Date();
 	var objekatSS = new SunriseSunset(trenutnoVreme.getUTCFullYear(), trenutnoVreme.getUTCMonth(), trenutnoVreme.getUTCDate(), 43.310383, 21.868767);
-	
+
 	if (trenutnoVreme.getHours() >= objekatSS.sunriseLocalHours(1) && trenutnoVreme.getHours() <= objekatSS.sunsetLocalHours(1))
 		return "";
 	else
@@ -72,9 +69,9 @@ function jsonSS() {
 
 function lokalniUredjaji() {
 
-	// Učitati status i  temperaturu peći 
+	// Učitati status i  temperaturu peći
 	ucitajTempStatus();
-	
+
 	// Učitava režim rada peći
 	piroQuerry("getMode", "-1", function() {
 			for (var i = 1; i <= 5; i++)
@@ -83,7 +80,7 @@ function lokalniUredjaji() {
 			document.getElementById("grejanje-" + (parseInt(this.responseText) + 1) + "-taster").src = "img/grejanje-" + (parseInt(this.responseText) + 1) + "-s.png";
 		}
 	);
-	
+
 	// Učitati status računara
 	piroQuerry("getPCStatus", "-1", function() {
 			if (this.responseText == 1) {
@@ -100,10 +97,10 @@ function lokalniUredjaji() {
 			}
 		}
 	);
-	
+
 	// Učitavanje statusa rasvete
 	// Kako se radi o asinhronoj funkciji, neophodno je "zamrznuti" brojač tokom trenutnog zahteva
-	// Zato se poziva funkcija sa vrednošću i kao parametrom 
+	// Zato se poziva funkcija sa vrednošću i kao parametrom
 	for (var i = 0; i < 3; i++) {
 		(function(id) {
 		    piroQuerry("getRelayStatus", id, function() {
@@ -130,8 +127,8 @@ function lokalniUredjaji() {
 	piroQuerry("getUptime", "-1", function() {
 			if (this.responseText.lastIndexOf(":") == -1) {
 				document.getElementById("status-uptime").innerHTML = "Operativno vreme: " + this.responseText + " dan";
-				if (this.responseText[this.responseText.length-1] != "1") 
-					document.getElementById("status-uptime").innerHTML += "a"; 
+				if (this.responseText[this.responseText.length-1] != "1")
+					document.getElementById("status-uptime").innerHTML += "a";
 			}
 			else
 				document.getElementById("status-uptime").innerHTML = "Server je pokrenut danas.";
@@ -146,7 +143,7 @@ function lokalniUredjaji() {
 }
 
 function inicijalnoPokretanje() {
-	
+
 	// Poziva funkciju za učitavanje vremena
 	ucitajVreme("Redovno");
 
@@ -155,5 +152,5 @@ function inicijalnoPokretanje() {
 	// Pokušaj automatskog ažuriranja statusa
 	// Nije se pokazao uspešnim
 	//setInterval(lokalniUredjaji, 5000);
-	
+
 }
