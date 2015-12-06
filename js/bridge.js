@@ -17,7 +17,9 @@ function piroQuerry(q, arg, callback) {
 
 // Funkcija za učitavanje vremena
 function ucitajVreme(arg) {
-	piroQuerry("azurirajVreme", arg, "-1");
+	piroQuerry("azurirajVreme", arg, function() {
+		console.log(this.responseText);
+	});
 
 	// Čekanje 1000ms zbog WU API
 	setTimeout(function(){
