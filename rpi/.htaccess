@@ -1,4 +1,0 @@
-<files weather.key>
-order allow,deny
-deny from all
-</files>
