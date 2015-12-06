@@ -8,13 +8,13 @@ document.onreadystatechange = function () {
 			document.getElementById('interactive');
 			document.getElementById('load').style.visibility="hidden";
 			document.getElementById('kontejner').style.visibility="visible";
-		}, 1000);
+		}, 1500);
 	}
 }
 
 function racunarToggle() {
 	piroQuerry("togglePC", "-1", "-1");
-	
+
 	if (document.getElementById("racunar-status").innerHTML == "Računar je isključen.") {
 		document.getElementById("racunar-taster").innerHTML = "ISKLJUČI";
 		document.getElementById("racunar-taster").className = "racunar-taster ukljuceno";
@@ -43,12 +43,12 @@ function rasvetaToggle(k) {
 
 }
 
-// Učitati status i  temperaturu peći 
+// Učitati status i  temperaturu peći
 function ucitajTempStatus() {
 	piroQuerry("thermalStatus", "-1", function() {
 			if (this.responseText == 0) {
 				document.getElementById("grejanje-vrednost").innerHTML = "Isklj.";
-				
+
 				for (var i = 1; i <= 5; i++)
 					document.getElementById("grejanje-" + i + "-taster").src = "img/grejanje-" + i + ".png";
 			}
@@ -84,9 +84,9 @@ function getThermalMode() {
 // Postavljanje režima rada
 function setThermalMode(arg) {
 	if (document.getElementById("grejanje-vrednost").innerHTML != "Isklj.")
-		piroQuerry("setMode", arg, function() {	
-			getThermalMode(); 
-			ucitajTempStatus();	
+		piroQuerry("setMode", arg, function() {
+			getThermalMode();
+			ucitajTempStatus();
 		});
 }
 
