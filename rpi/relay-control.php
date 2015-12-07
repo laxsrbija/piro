@@ -15,10 +15,10 @@
 				$GLOBALS['uredjaji'][intval($a)][1] = 0;
 				switch($a) {
 					case 0:
-						exec("gpio mode 0 out && gpio write 0 1  2>&1");
+						exec("gpio mode ".GPIO_LED_GLAVNA." out && gpio write ".GPIO_LED_GLAVNA." 1  2>&1");
 						break;
 					case 1:
-						exec("gpio mode 2 out && gpio write 2 1  2>&1");
+						exec("gpio mode ".GPIO_LED_DESNO." out && gpio write ".GPIO_LED_DESNO." 1  2>&1");
 						break;
 				}
 			}
@@ -26,10 +26,10 @@
 				$GLOBALS['uredjaji'][intval($a)][1] = 1;
 				switch($a) {
 					case 0:
-						exec("gpio mode 0 out && gpio write 0 0  2>&1");
+						exec("gpio mode ".GPIO_LED_GLAVNA." out && gpio write ".GPIO_LED_GLAVNA." 0  2>&1");
 						break;
 					case 1:
-						exec("gpio mode 2 out && gpio write 2 0  2>&1");
+						exec("gpio mode ".GPIO_LED_DESNO." out && gpio write ".GPIO_LED_DESNO." 0  2>&1");
 						break;
 				}
 			}
