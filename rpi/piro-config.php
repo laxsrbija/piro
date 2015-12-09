@@ -8,9 +8,17 @@
 	define("TEMP_NOCNA", "19.5");
 	define("TEMP_ODRZAVANJE", "7");
 
-	// GPIO pinovi za kontrolu releja
-	define("GPIO_LED_GLAVNA", "0");
-	define("GPIO_LED_DESNO", "2");
+	// GPIO pinovi za kontrolu rasvete
+	define("GPIO_LED_GLAVNA", "2");
+	define("GPIO_LED_DESNO", "0");
 	#define("GPIO_LED_LEVO", ""); Nije u upotrebi
 
+	// GPIO pinovi za kontrolu grejnog tela
+	define("GPIO_TERMO_PWR", "1");
+	define("GPIO_TERMO_INC", "4");
+	define("GPIO_TERMO_DEC", "5");
+
+	// GPIO pinovi za kontrolu računara
+	define("GPIO_PC", "6");
+	
 ?>

@@ -2,7 +2,7 @@
 <piro>
 	<uredjaj>
 		<id>led_paneli</id>
-		<status>0</status>
+		<status>1</status>
 	</uredjaj>
 	<uredjaj>
 		<id>led_desno</id>
@@ -30,23 +30,23 @@
 	</uredjaj>
 	<uredjaj>
 		<id>vreme_azurirano</id>
-		<status>1449253883</status>
+		<status>1449655090</status>
 	</uredjaj>
 	<uredjaj>
 		<id>vreme_curr_temp</id>
-		<status>7</status>
+		<status>5</status>
 	</uredjaj>
 	<uredjaj>
 		<id>vreme_stanje</id>
-		<status>Vedro</status>
+		<status>Oblačno</status>
 	</uredjaj>
 	<uredjaj>
 		<id>vreme_ikona</id>
-		<status>clear</status>
+		<status>cloudy</status>
 	</uredjaj>
 	<uredjaj>
 		<id>vreme_max_temp</id>
-		<status>11</status>
+		<status>7</status>
 	</uredjaj>
 	<uredjaj>
 		<id>vreme_min_temp</id>
@@ -54,7 +54,7 @@
 	</uredjaj>
 	<uredjaj>
 		<id>vreme_ikona_dnevna</id>
-		<status>clear</status>
+		<status>partlycloudy</status>
 	</uredjaj>
 	<uredjaj>
 		<id>vreme_verovatnoca_padavina</id>
