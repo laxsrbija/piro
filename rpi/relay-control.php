@@ -15,10 +15,10 @@
 				$GLOBALS['uredjaji'][intval($a)][1] = 0;
 				switch($a) {
 					case 0:
-						exec("gpio mode ".GPIO_LED_GLAVNA." out && gpio write ".GPIO_LED_GLAVNA." 1  2>&1");
+						exec("gpio write ".GPIO_LED_GLAVNA." 1  2>&1");
 						break;
 					case 1:
-						exec("gpio mode ".GPIO_LED_DESNO." out && gpio write ".GPIO_LED_DESNO." 1  2>&1");
+						exec("gpio write ".GPIO_LED_DESNO." 1  2>&1");
 						break;
 				}
 			}
@@ -26,10 +26,10 @@
 				$GLOBALS['uredjaji'][intval($a)][1] = 1;
 				switch($a) {
 					case 0:
-						exec("gpio mode ".GPIO_LED_GLAVNA." out && gpio write ".GPIO_LED_GLAVNA." 0  2>&1");
+						exec("gpio write ".GPIO_LED_GLAVNA." 0  2>&1");
 						break;
 					case 1:
-						exec("gpio mode ".GPIO_LED_DESNO." out && gpio write ".GPIO_LED_DESNO." 0  2>&1");
+						exec("gpio write ".GPIO_LED_DESNO." 0  2>&1");
 						break;
 				}
 			}
@@ -52,7 +52,8 @@
 		else
 			$GLOBALS['uredjaji'][3][1] = 1;
 
-		// TODO Python kod za računar
+		exec("gpio write ".GPIO_PC." 0 && sleep 0.2 && gpio write ".GPIO_PC." 1 2>&1");
+
 		upis();
 	}
 
