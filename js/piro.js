@@ -8,7 +8,7 @@ document.onreadystatechange = function () {
 			document.getElementById('interactive');
 			document.getElementById('load').style.visibility="hidden";
 			document.getElementById('kontejner').style.visibility="visible";
-		}, 1500);
+		}, 1200);
 	}
 }
 
