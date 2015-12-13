@@ -75,8 +75,8 @@
 
 				$temp = floatval($temp) + 0.5;
 
-				// Čekanje 0.3 sec
-				time_nanosleep(0, 300000000);
+				// Čekanje 0.15 sec
+				time_nanosleep(0, 150000000);
 			}
 
 		else if ($temp > $arg)
@@ -85,8 +85,8 @@
 
 				$temp = floatval($temp) - 0.5;
 
-				// Čekanje 0.3 sec
-				time_nanosleep(0, 300000000);
+				// Čekanje 0.15 sec
+				time_nanosleep(0, 150000000);
 			}
 	}
 
