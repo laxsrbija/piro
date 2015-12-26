@@ -14,9 +14,9 @@
 	#define("GPIO_LED_LEVO", ""); Nije u upotrebi
 
 	// GPIO pinovi za kontrolu grejnog tela
-	define("GPIO_TERMO_PWR", "1");
-	define("GPIO_TERMO_INC", "4");
-	define("GPIO_TERMO_DEC", "5");
+	define("GPIO_TERMO_PWR", "5");
+	define("GPIO_TERMO_INC", "1");
+	define("GPIO_TERMO_DEC", "4");
 
 	// GPIO pinovi za kontrolu računara
 	define("GPIO_PC", "6");
