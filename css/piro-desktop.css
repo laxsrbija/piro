@@ -92,14 +92,14 @@ body {
 }
 
 #prognoza-vrednost {
-	position: absolute;
-	font-family: Roboto, sans-serif;
-	font-weight: 300;
 	color: #b82d40;
+	font-family: Roboto,sans-serif;
+	font-size: 42px;
+	font-weight: 300;
+	left: 15px;
+	position: absolute;
 	text-align: right;
-	font-size: 48px;
-	top: 160px;
-	left: 17px;
+	top: 164px;
 	width: 71px;
 }
 
@@ -110,7 +110,7 @@ body {
 	color: #353535;
 	font-size: 13.5pt;
 	top: 168px;
-	left: 96px;
+	left: 94px;
 }
 
 #prognoza-grad {
@@ -120,20 +120,20 @@ body {
 	color: #353535;
 	font-size: 10pt;
 	top: 190px;
-	left: 97px;	
+	left: 94px;
 }
 
 .prognoza hr {
 	position: absolute;
 	top: 220px;
-	left: 15px; 
+	left: 15px;
 	width: 240px;
 	display: block;
     height: 1px;
     border: none;
     border-top: 1px solid #b82d40;
     margin: 1em 0;
-    padding: 0; 
+    padding: 0;
 }
 
 #prognoza-ikona-dnevna {
@@ -177,7 +177,7 @@ body {
 #prognoza-osvezi {
 	position: absolute;
 	right: 7px;
-	top: 7px;	
+	top: 7px;
 }
 
 .racunar {
@@ -258,7 +258,7 @@ body {
 
 .rasv-0-taster{
 	top: 50px;
-	left: 80px;	
+	left: 80px;
 }
 
 .rasv-cent-status {
@@ -277,7 +277,7 @@ body {
 
 .rasv-1-taster{
 	top: 127px;
-	left: 80px;	
+	left: 80px;
 }
 
 .rasv-desn-status {
@@ -296,7 +296,7 @@ body {
 
 .rasv-2-taster{
 	bottom: 37px;
-	left: 80px;	
+	left: 80px;
 }
 
 .rasv-lev-status {
