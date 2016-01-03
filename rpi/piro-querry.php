@@ -12,7 +12,7 @@
 	$q = $_REQUEST["f"];
 	$arg = $_REQUEST["arg"];
 
-	// NOTE: Svaka izmena funkcija u posebnim 
+	// NOTE: Svaka izmena funkcija u posebnim
 	// modulima mora biti primenjena i ovde!
 
 	// Odabir funkcije
@@ -45,7 +45,7 @@
 			toggleRelay($arg);
 			break;
 		case "azurirajVreme":
-			azurirajVreme($arg);
+			echo azurirajVreme($arg);
 			break;
 		case "getWTemp":
 			echo getWTemp();
@@ -67,6 +67,12 @@
 			break;
 		case "getPadavine":
 			echo getPadavine();
+			break;
+		case "getVisibility":
+			echo getVisibility();
+			break;
+		case "getSubTemp":
+			echo getSubTemp();
 			break;
 		case "getPCStatus":
 			echo getPCStatus();
