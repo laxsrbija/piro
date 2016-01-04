@@ -65,6 +65,9 @@
 		case "getIconDaily":
 			echo getIconDaily();
 			break;
+		case "getDescDaily":
+			echo getDescDaily();
+			break;
 		case "getPadavine":
 			echo getPadavine();
 			break;
@@ -73,6 +76,12 @@
 			break;
 		case "getSubTemp":
 			echo getSubTemp();
+			break;
+		case "getUV":
+			echo getUV();
+			break;
+		case "getNazivDana":
+			echo getNazivDana();
 			break;
 		case "getPCStatus":
 			echo getPCStatus();

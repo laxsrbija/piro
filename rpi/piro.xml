@@ -30,7 +30,7 @@
 	</uredjaj>
 	<uredjaj>
 		<id>vreme_azurirano</id>
-		<status>1451851706</status>
+		<status>1451871346</status>
 	</uredjaj>
 	<uredjaj>
 		<id>vreme_curr_temp</id>
@@ -38,19 +38,19 @@
 	</uredjaj>
 	<uredjaj>
 		<id>vreme_stanje</id>
-		<status>Sneg</status>
+		<status>Oblačno</status>
 	</uredjaj>
 	<uredjaj>
 		<id>vreme_ikona</id>
-		<status>snow</status>
+		<status>cloudy</status>
 	</uredjaj>
 	<uredjaj>
 		<id>vreme_max_temp</id>
-		<status>-3</status>
+		<status>-2</status>
 	</uredjaj>
 	<uredjaj>
 		<id>vreme_min_temp</id>
-		<status>-14</status>
+		<status>-8</status>
 	</uredjaj>
 	<uredjaj>
 		<id>vreme_ikona_dnevna</id>
@@ -58,14 +58,26 @@
 	</uredjaj>
 	<uredjaj>
 		<id>vreme_verovatnoca_padavina</id>
-		<status>50</status>
+		<status>100</status>
 	</uredjaj>
 	<uredjaj>
 		<id>vreme_vidljivost</id>
-		<status>3.0</status>
+		<status>10.0</status>
 	</uredjaj>
 	<uredjaj>
 		<id>subjektivni_osecaj</id>
-		<status>-10</status>
+		<status>-13</status>
+	</uredjaj>
+	<uredjaj>
+		<id>naziv_dana</id>
+		<status>Ponedeljak</status>
+	</uredjaj>
+	<uredjaj>
+		<id>vreme_opis_dnevna</id>
+		<status>Sneg</status>
+	</uredjaj>
+	<uredjaj>
+		<id>vreme_uv</id>
+		<status>0</status>
 	</uredjaj>
 </piro>
