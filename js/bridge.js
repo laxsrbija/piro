@@ -113,6 +113,10 @@ function jsonSS() {
 	var objekatSS = new SunriseSunset(trenutnoVreme.getUTCFullYear(),
 		trenutnoVreme.getUTCMonth(), trenutnoVreme.getUTCDate(), 43.310383, 21.868767);
 
+	// Učitavanje footera o istom trošku stvaranja Date objekta
+	var d = new Date();
+	document.getElementById("footer").innerHTML = "Copyright © " + d.getUTCFullYear() + " Lazar Stanojević. Sva prava zadržana.";
+
 	if (trenutnoVreme.getHours() >= objekatSS.sunriseLocalHours(1)
 		&& trenutnoVreme.getHours() <= objekatSS.sunsetLocalHours(1))
 		return "";
@@ -181,7 +185,7 @@ function lokalniUredjaji() {
 	piroQuerry("getUptime", "-1", function() {
 			if (this.responseText != 0) {
 				document.getElementById("status-uptime").innerHTML = "Operativno vreme: " + this.responseText + " dan";
-				if (this.responseText[this.responseText.length-1] != "1")
+				if (this.responseText[this.responseText.length-1] != "1" || this.responseText.length - 2 == this.responseText.lastIndexOf("11"))
 					document.getElementById("status-uptime").innerHTML += "a";
 			}
 			else
@@ -198,9 +202,6 @@ function lokalniUredjaji() {
 }
 
 function inicijalnoPokretanje() {
-
-	var d = new Date();
-	document.getElementById("footer").innerHTML = "Copyright © " + d.getUTCFullYear() + " Lazar Stanojević. Sva prava zadržana.";
 
 	// Poziva funkciju za učitavanje vremena
 	ucitajVreme("Redovno");
