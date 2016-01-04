@@ -62,6 +62,17 @@
 				// Cuvanje subjektivne temperature
 				$GLOBALS['uredjaji'][16][1] = $xml->current_observation->feelslike_c;
 
+				// Cuvanje naziva dana
+				$GLOBALS['uredjaji'][17][1] =
+					str_replace($cyr, $lat, $xml2->forecast->txt_forecast->forecastdays->forecastday[0]->title);
+
+				// Cuvanje opisa dnevnih vremenskih uslova
+				$GLOBALS['uredjaji'][18][1] =
+					str_replace($cyr, $lat, $xml2->forecast->simpleforecast->forecastdays->forecastday[0]->conditions);
+
+				// Cuvanje vrednosti UV indeksa
+				$GLOBALS['uredjaji'][19][1] = $xml->current_observation->UV;
+
 				upis();
 
 			}
@@ -106,6 +117,18 @@
 
 	function getSubTemp() {
 		return $GLOBALS['uredjaji'][16][1];
+	}
+
+	function getNazivDana() {
+		return $GLOBALS['uredjaji'][17][1];
+	}
+
+	function getDescDaily() {
+		return $GLOBALS['uredjaji'][18][1];
+	}
+
+	function getUV() {
+		return $GLOBALS['uredjaji'][19][1];
 	}
 
 ?>
