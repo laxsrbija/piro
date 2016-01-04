@@ -179,7 +179,7 @@ function lokalniUredjaji() {
 
 	// Učitava temperaturu sistema
 	piroQuerry("getUptime", "-1", function() {
-			if (this.responseText.lastIndexOf(":") == -1) {
+			if (this.responseText != 0) {
 				document.getElementById("status-uptime").innerHTML = "Operativno vreme: " + this.responseText + " dan";
 				if (this.responseText[this.responseText.length-1] != "1")
 					document.getElementById("status-uptime").innerHTML += "a";
@@ -198,7 +198,7 @@ function lokalniUredjaji() {
 }
 
 function inicijalnoPokretanje() {
-	
+
 	var d = new Date();
 	document.getElementById("footer").innerHTML = "Copyright © " + d.getUTCFullYear() + " Lazar Stanojević. Sva prava zadržana.";
 
