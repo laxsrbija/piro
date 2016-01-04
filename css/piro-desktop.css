@@ -179,6 +179,7 @@ body {
     background-image: url("../img/ico-vid.png");
     padding-left: 27px;
     width: 50px;
+    margin-right: -5px;
 }
 #prognoza-ic-padavine {
     background-image: url("../img/ico-pad.png");
