@@ -18,6 +18,26 @@ function ucitajVreme(arg) {
 
 		var statusDana = jsonSS();
 
+		piroQuerry("getUV", "-1", function() {
+				var uvStepen;
+				var uvIndeks = this.responseText;
+
+				if (uvIndeks >= 11)
+					uvStepen = 4;
+				else if (uvIndeks >= 8)
+					uvStepen = 3;
+				else if (uvIndeks >= 6)
+					uvStepen = 2;
+				else if (uvIndeks >= 3)
+					uvStepen = 1;
+				else
+					uvStepen = 0;
+
+				document.getElementById("prognoza-uv").src = "img/uv-" + uvStepen + ".png";
+
+			}
+		);
+
 		piroQuerry("getWTemp", "-1", function() {
 				document.getElementById("prognoza-vrednost").innerHTML = this.responseText + "°";
 			}
@@ -40,18 +60,45 @@ function ucitajVreme(arg) {
 			}
 		);
 
-		piroQuerry("getMaxTemp", "-1", function() {
-				document.getElementById("prognoza-max").innerHTML = "Maksimalna: " + this.responseText + "°";
+		piroQuerry("getNazivDana", "-1", function() {
+				document.getElementById("prognoza-dan").innerHTML = this.responseText;
 			}
 		);
 
-		piroQuerry("getMinTemp", "-1", function() {
-				document.getElementById("prognoza-min").innerHTML = "Minimalna: " + this.responseText + "°";
+		piroQuerry("getMaxTemp", "-1", function() {
+				var tmp = this.responseText;
+
+				piroQuerry("getMinTemp", "-1", function() {
+						document.getElementById("prognoza-dnevna-vrednost").innerHTML = tmp + "° / " + this.responseText + "°";
+					}
+				);
+
+			}
+		);
+
+		piroQuerry("getDescDaily", "-1", function() {
+				document.getElementById("prognoza-dnevna-opis").innerHTML = this.responseText;
 			}
 		);
 
 		piroQuerry("getPadavine", "-1", function() {
-				document.getElementById("prognoza-padavine").innerHTML = "Mogućnost padavina: " + this.responseText + "%";
+				document.getElementById("prognoza-ic-padavine").innerHTML = this.responseText + "%";
+			}
+		);
+
+		piroQuerry("getSubTemp", "-1", function() {
+				document.getElementById("prognoza-ic-subjektivniosecaj").innerHTML = this.responseText + "°";
+			}
+		);
+
+		piroQuerry("getVisibility", "-1", function() {
+				var t = this.responseText;
+
+				// Provera da li je vidljivost ceo broj
+				if (t % 1 === 0)
+					t = parseInt(t);
+
+				document.getElementById("prognoza-ic-vidljivost").innerHTML = t + " km";
 			}
 		);
 
