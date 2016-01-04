@@ -426,3 +426,12 @@ body {
 #status-opterecenje {
     top: 102px;
 }
+#footer {
+    position:fixed;
+    bottom: 5px;
+    right: 5px;
+    font-size: 9pt;
+    font-weight: 400;
+    color: #333333;
+    text-decoration: none;
+}

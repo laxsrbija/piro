@@ -198,6 +198,9 @@ function lokalniUredjaji() {
 }
 
 function inicijalnoPokretanje() {
+	
+	var d = new Date();
+	document.getElementById("footer").innerHTML = "Copyright © " + d.getUTCFullYear() + " Lazar Stanojević. Sva prava zadržana.";
 
 	// Poziva funkciju za učitavanje vremena
 	ucitajVreme("Redovno");
