@@ -8,9 +8,9 @@
 
 	// Vraća broj dana besprekidnog rada sistema
 	function getUptime() {
-		exec("uptime 2>&1", $tmp);
+		exec("uptime 2>&1", $tmp1);
 
-		if (!strpos($tmp[0], "day"))
+		if (!strpos($tmp1[0], "day"))
 			return 0;
 
 		exec("uptime | awk '{print $3}' 2>&1", $tmp);

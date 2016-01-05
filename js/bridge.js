@@ -185,7 +185,9 @@ function lokalniUredjaji() {
 	piroQuerry("getUptime", "-1", function() {
 			if (this.responseText != 0) {
 				document.getElementById("status-uptime").innerHTML = "Operativno vreme: " + this.responseText + " dan";
-				if (this.responseText[this.responseText.length-1] != "1" || this.responseText.length - 2 == this.responseText.lastIndexOf("11"))
+
+				if (this.responseText[this.responseText.length-1] != "1"
+					|| this.responseText.lastIndexOf("11") != -1 && this.responseText.length - 2 == this.responseText.lastIndexOf("11"))
 					document.getElementById("status-uptime").innerHTML += "a";
 			}
 			else
