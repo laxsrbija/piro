@@ -97,8 +97,11 @@ function ucitajVreme(arg) {
 				// Provera da li je vidljivost ceo broj
 				if (t % 1 === 0)
 					t = parseInt(t);
-
-				document.getElementById("prognoza-ic-vidljivost").innerHTML = t + " km";
+				
+				if (t < 1)
+					document.getElementById("prognoza-ic-vidljivost").innerHTML = (parseFloat(t) * 1000) + " m";
+				else
+					document.getElementById("prognoza-ic-vidljivost").innerHTML = t + " km";
 			}
 		);
 
