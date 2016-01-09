@@ -25,8 +25,8 @@
 		// Kako ne bi došlo do prekoračenja upotrebe API zahteva,
 		// vreme se ažurira jednom u 5 minuta
 		if (time() - intval($GLOBALS['uredjaji'][7][1]) >= 300 || strcmp($a, "force") == 0) {
-			$xml = simplexml_load_file($apiURL);
-			$xml2 = simplexml_load_file($apiURLDaily);
+			$xml = simplexml_load_string(file_get_contents($apiURL));
+			$xml2 = simplexml_load_string(file_get_contents($apiURLDaily));
 
 			// Provera da li je vreme ispravno učitano
 			if (strcmp($xml->current_observation->temp_c, "") != 0) {
@@ -57,7 +57,10 @@
 				$GLOBALS['uredjaji'][14][1] = $xml2->forecast->simpleforecast->forecastdays->forecastday[0]->pop;
 
 				// Cuvanje trenutne vidljivosti
-				$GLOBALS['uredjaji'][15][1] = $xml->current_observation->visibility_km;
+				if ($xml->current_observation->visibility_km == "N/A")
+					$GLOBALS['uredjaji'][15][1] = "20";
+				else
+					$GLOBALS['uredjaji'][15][1] = $xml->current_observation->visibility_km;
 
 				// Cuvanje subjektivne temperature
 				$GLOBALS['uredjaji'][16][1] = $xml->current_observation->feelslike_c;
@@ -77,10 +80,10 @@
 
 			}
 
-			return $xml->current_observation->temp_c;
+			return "OK";
 		}
 
-		return "Prvi IF";
+		return "GREŠKA: ".((time()-$GLOBALS['uredjaji'][7][1]) / 60);
 	}
 
 	function getWTemp() {
