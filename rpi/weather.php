@@ -57,9 +57,7 @@
 				$GLOBALS['uredjaji'][14][1] = $xml2->forecast->simpleforecast->forecastdays->forecastday[0]->pop;
 
 				// Cuvanje trenutne vidljivosti
-				if ($xml->current_observation->visibility_km == "N/A")
-					$GLOBALS['uredjaji'][15][1] = "20";
-				else
+				if (strcmp($xml->current_observation->visibility_km, "N/A"))
 					$GLOBALS['uredjaji'][15][1] = $xml->current_observation->visibility_km;
 
 				// Cuvanje subjektivne temperature
