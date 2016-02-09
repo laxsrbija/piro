@@ -98,7 +98,9 @@ function ucitajVreme(arg) {
 				if (t % 1 === 0)
 					t = parseInt(t);
 				
-				if (t < 1)
+				if (t < 0.1)
+					document.getElementById("prognoza-ic-vidljivost").innerHTML = "<100 m";
+				else if (t < 1)
 					document.getElementById("prognoza-ic-vidljivost").innerHTML = (parseFloat(t) * 1000) + " m";
 				else
 					document.getElementById("prognoza-ic-vidljivost").innerHTML = t + " km";
