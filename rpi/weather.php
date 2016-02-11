@@ -57,8 +57,16 @@
 				$GLOBALS['uredjaji'][14][1] = $xml2->forecast->simpleforecast->forecastdays->forecastday[0]->pop;
 
 				// Cuvanje trenutne vidljivosti
-				if (strcmp($xml->current_observation->visibility_km, "N/A"))
-					$GLOBALS['uredjaji'][15][1] = $xml->current_observation->visibility_km;
+				if (strcmp($xml->current_observation->visibility_km, "N/A")) {
+					$vidljivost = floatval($xml->current_observation->visibility_km);
+					
+					if (floor($vidljivost) == $vidljivost)
+						$GLOBALS['uredjaji'][15][1] = floor($vidljivost)." km";
+					elseif ($vidljivost >= 0.1)
+						$GLOBALS['uredjaji'][15][1] = ($vidljivost * 1000)." m";
+					else 
+						$GLOBALS['uredjaji'][15][1] = "< 100m";
+				}
 
 				// Cuvanje subjektivne temperature
 				$GLOBALS['uredjaji'][16][1] = $xml->current_observation->feelslike_c;

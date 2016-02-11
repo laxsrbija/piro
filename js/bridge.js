@@ -92,18 +92,7 @@ function ucitajVreme(arg) {
 		);
 
 		piroQuerry("getVisibility", "-1", function() {
-				var t = this.responseText;
-
-				// Provera da li je vidljivost ceo broj
-				if (t % 1 === 0)
-					t = parseInt(t);
-				
-				if (t < 0.1)
-					document.getElementById("prognoza-ic-vidljivost").innerHTML = "<100 m";
-				else if (t < 1)
-					document.getElementById("prognoza-ic-vidljivost").innerHTML = (parseFloat(t) * 1000) + " m";
-				else
-					document.getElementById("prognoza-ic-vidljivost").innerHTML = t + " km";
+				document.getElementById("prognoza-ic-vidljivost").innerHTML = this.responseText;
 			}
 		);
 
