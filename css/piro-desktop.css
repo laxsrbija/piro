@@ -311,7 +311,7 @@ body {
 }
 #grejanje-tasteri {
     bottom: 45px;
-    padding-left: 22px;
+    padding-left: 24px;
     position: absolute;
     text-align: center;
     width: 240px;
@@ -321,7 +321,7 @@ body {
 }
 #grejanje-tasteri a img {
     height: 16px;
-    padding-right: 15px;
+    margin-right: 15px;
     width: 16px;
 }
 .grejanje-pojacaj,
