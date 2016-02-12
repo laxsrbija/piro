@@ -123,16 +123,6 @@ function lokalniUredjaji() {
 	// Učitati status i  temperaturu peći
 	ucitajTempStatus();
 
-	// Učitava režim rada peći
-	piroQuerry("getMode", "-1", function() {
-			for (var i = 1; i <= 5; i++)
-				document.getElementById("grejanje-" + i + "-taster").src = "img/grejanje-" + i + ".png";
-
-			document.getElementById("grejanje-" + (parseInt(this.responseText) + 1)
-				+ "-taster").src = "img/grejanje-" + (parseInt(this.responseText) + 1) + "-s.png";
-		}
-	);
-
 	// Učitati status računara
 	piroQuerry("getPCStatus", "-1", function() {
 			if (this.responseText == 1) {
