@@ -13,6 +13,7 @@
 					   // koristi se dati kod da preskoči njegove kontrole
 			if (getRelayStatus($a) == 1) {
 				$GLOBALS['uredjaji'][intval($a)][1] = 0;
+				
 				switch($a) {
 					case 0:
 						exec("gpio write ".GPIO_LED_GLAVNA." 1  2>&1");
@@ -21,9 +22,12 @@
 						exec("gpio write ".GPIO_LED_DESNO." 1  2>&1");
 						break;
 				}
+				
+				autoTemp();
 			}
 			else {
 				$GLOBALS['uredjaji'][intval($a)][1] = 1;
+				
 				switch($a) {
 					case 0:
 						exec("gpio write ".GPIO_LED_GLAVNA." 0  2>&1");
@@ -35,8 +39,10 @@
 			}
 		}
 		else {
-			if (getRelayStatus($a) == 1) $GLOBALS['uredjaji'][intval($a)][1] = 0;
-			else $GLOBALS['uredjaji'][intval($a)][1] = 1;
+			if (getRelayStatus($a) == 1) 
+				$GLOBALS['uredjaji'][intval($a)][1] = 0;
+			else 
+				$GLOBALS['uredjaji'][intval($a)][1] = 1;
 		}
 
 		upis();

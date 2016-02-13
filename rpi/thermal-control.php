@@ -19,13 +19,21 @@
 
 	// Postavljanja režima rada grejnog tela
 	function setMode($a) {
-
-		if ($a == 2)
-			setTemp(floatval(TEMP_DNEVNA));
-		else if ($a == 3)
-			setTemp(floatval(TEMP_NOCNA));
-		else if ($a == 4)
-			setTemp(intval(TEMP_ODRZAVANJE));
+		
+		switch($a) {
+			case 1:
+				autoTemp();
+				break;
+			case 2:
+				setTemp(floatval(TEMP_DNEVNA));
+				break;
+			case 3:
+				setTemp(floatval(TEMP_NOCNA));
+				break;
+			case 4:
+				setTemp(intval(TEMP_ODRZAVANJE));
+				break;
+		}
 
 		$GLOBALS['uredjaji'][6][1] = intval($a);
 		upis();
@@ -88,6 +96,14 @@
 				// Čekanje 0.15 sec
 				time_nanosleep(0, 150000000);
 			}
+	}
+	
+	// Funkcija za automatizaciju grejnog tela
+	function autoTemp() {
+		if (getMode() == 0 && getRelayStatus(0) == 0 && getRelayStatus(1) == 0 && getRelayStatus(2) == 0 && (date("G") >= 11 || date("G") <= 6))
+			setTemp(floatval(TEMP_NOCNA));
+		else if (getMode() == 0 && date("G") == 8)
+			setTemp(floatval(TEMP_DNEVNA));
 	}
 
 ?>

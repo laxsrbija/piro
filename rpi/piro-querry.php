@@ -1,4 +1,6 @@
 <?php
+	//ini_set('display_errors', 1);
+
 	require ("piro-config.php");
 	require ("manipulator.php");
 	require ("thermal-control.php");
@@ -97,6 +99,9 @@
 			break;
 		case "getLoadAvg":
 			echo getLoadAvg();
+			break;
+		case "autoTemp":
+			autoTemp();
 			break;
 	}
 ?>
