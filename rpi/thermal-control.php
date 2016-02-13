@@ -100,9 +100,9 @@
 	
 	// Funkcija za automatizaciju grejnog tela
 	function autoTemp() {
-		if (getMode() == 0 && getRelayStatus(0) == 0 && getRelayStatus(1) == 0 && getRelayStatus(2) == 0 && (date("G") >= 11 || date("G") <= 6))
+		if (getMode() == 0 && getRelayStatus(0) == 0 && getRelayStatus(1) == 0 && getRelayStatus(2) == 0 && (date("G") == 23 || date("G") <= 6))
 			setTemp(floatval(TEMP_NOCNA));
-		else if (getMode() == 0 && date("G") == 8)
+		else if (getMode() == 0 && getTemp() == TEMP_NOCNA)
 			setTemp(floatval(TEMP_DNEVNA));
 	}
 
