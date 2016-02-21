@@ -1,8 +1,8 @@
 // Osnovna funkcija za komuniciranje sa PHP datotekama
-function piroQuerry(q, arg, callback) {
+function piroQuery(q, arg, callback) {
 	var xmlhttp = new XMLHttpRequest();
 
-	xmlhttp.open("GET", "rpi/piro-querry.php?f=" + q + "&arg=" + arg, true);
+	xmlhttp.open("GET", "rpi/piro-query.php?f=" + q + "&arg=" + arg, true);
 
 	xmlhttp.onreadystatechange = function() {
 		if (xmlhttp.readyState == 4 && xmlhttp.status == 200 && typeof callback == "function")
@@ -14,11 +14,11 @@ function piroQuerry(q, arg, callback) {
 
 // Funkcija za učitavanje vremena
 function ucitajVreme(arg) {
-	piroQuerry("azurirajVreme", arg, function() {
+	piroQuery("azurirajVreme", arg, function() {
 
 		var statusDana = jsonSS();
 
-		piroQuerry("getUV", "-1", function() {
+		piroQuery("getUV", "-1", function() {
 				var uvStepen;
 				var uvIndeks = this.responseText;
 
@@ -38,37 +38,37 @@ function ucitajVreme(arg) {
 			}
 		);
 
-		piroQuerry("getWTemp", "-1", function() {
+		piroQuery("getWTemp", "-1", function() {
 				document.getElementById("prognoza-vrednost").innerHTML = this.responseText + "°";
 			}
 		);
 
-		piroQuerry("getIcon", "-1", function() {
+		piroQuery("getIcon", "-1", function() {
 				document.getElementById("prognoza-ikona").src = "http://icons.wxug.com/i/c/v2/"
 				+ statusDana + this.responseText + ".svg";
 			}
 		);
 
-		piroQuerry("getDesc", "-1", function() {
+		piroQuery("getDesc", "-1", function() {
 				document.getElementById("prognoza-opis").innerHTML = this.responseText;
 			}
 		);
 
-		piroQuerry("getIconDaily", "-1", function() {
+		piroQuery("getIconDaily", "-1", function() {
 				document.getElementById("prognoza-ikona-dnevna").src = "http://icons.wxug.com/i/c/v2/"
 				+ statusDana + this.responseText + ".svg";
 			}
 		);
 
-		piroQuerry("getNazivDana", "-1", function() {
+		piroQuery("getNazivDana", "-1", function() {
 				document.getElementById("prognoza-dan").innerHTML = this.responseText;
 			}
 		);
 
-		piroQuerry("getMaxTemp", "-1", function() {
+		piroQuery("getMaxTemp", "-1", function() {
 				var tmp = this.responseText;
 
-				piroQuerry("getMinTemp", "-1", function() {
+				piroQuery("getMinTemp", "-1", function() {
 						document.getElementById("prognoza-dnevna-vrednost").innerHTML = tmp + "° / " + this.responseText + "°";
 					}
 				);
@@ -76,22 +76,22 @@ function ucitajVreme(arg) {
 			}
 		);
 
-		piroQuerry("getDescDaily", "-1", function() {
+		piroQuery("getDescDaily", "-1", function() {
 				document.getElementById("prognoza-dnevna-opis").innerHTML = this.responseText;
 			}
 		);
 
-		piroQuerry("getPadavine", "-1", function() {
+		piroQuery("getPadavine", "-1", function() {
 				document.getElementById("prognoza-ic-padavine").innerHTML = this.responseText + "%";
 			}
 		);
 
-		piroQuerry("getSubTemp", "-1", function() {
+		piroQuery("getSubTemp", "-1", function() {
 				document.getElementById("prognoza-ic-subjektivniosecaj").innerHTML = this.responseText + "°";
 			}
 		);
 
-		piroQuerry("getVisibility", "-1", function() {
+		piroQuery("getVisibility", "-1", function() {
 				document.getElementById("prognoza-ic-vidljivost").innerHTML = this.responseText;
 			}
 		);
@@ -124,7 +124,7 @@ function lokalniUredjaji() {
 	ucitajTempStatus();
 
 	// Učitati status računara
-	piroQuerry("getPCStatus", "-1", function() {
+	piroQuery("getPCStatus", "-1", function() {
 			if (this.responseText == 1) {
 				document.getElementById("racunar-taster").innerHTML = "ISKLJUČI";
 				document.getElementById("racunar-kuler").src = "img/fan-rot.gif";
@@ -145,7 +145,7 @@ function lokalniUredjaji() {
 	// Zato se poziva funkcija sa vrednošću i kao parametrom
 	for (var i = 0; i < 3; i++) {
 		(function(id) {
-		    piroQuerry("getRelayStatus", id, function() {
+		    piroQuery("getRelayStatus", id, function() {
 					if (this.responseText == 1) {
 						document.getElementById("rasv-" + id + "-taster").innerHTML = "ISKLJUČI";
 						document.getElementById("rasv-" + id + "-taster").className = "rasv-" + id + "-taster ukljuceno";
@@ -160,13 +160,13 @@ function lokalniUredjaji() {
 	}
 
 	// Učitava temperaturu sistema
-	piroQuerry("getShellTemp", "-1", function() {
+	piroQuery("getShellTemp", "-1", function() {
 			document.getElementById("status-temperatura").innerHTML = "Temperatura servera: " + this.responseText + "°C";
 		}
 	);
 
 	// Učitava temperaturu sistema
-	piroQuerry("getUptime", "-1", function() {
+	piroQuery("getUptime", "-1", function() {
 			if (this.responseText != 0) {
 				document.getElementById("status-uptime").innerHTML = "Operativno vreme: " + this.responseText + " dan";
 
@@ -179,7 +179,7 @@ function lokalniUredjaji() {
 		}
 	);
 
-	piroQuerry("getLoadAvg", "-1", function() {
+	piroQuery("getLoadAvg", "-1", function() {
 			document.getElementById("status-opterecenje").innerHTML =
 				"Prosečno opterećenje servera: " + parseInt(this.responseText) + "%";
 		}
