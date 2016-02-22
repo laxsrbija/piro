@@ -2,19 +2,23 @@
 
 	// Vraća stanje grejnog tela
 	function thermalStatus() {
-		return intval($GLOBALS['uredjaji'][4][1]);
+		return $GLOBALS['uredjaji'][4][1];
 	}
 
 	// Vraća trenutnu temperaturu
 	function getTemp() {
-		return floatval($GLOBALS['uredjaji'][5][1]);
+		return $GLOBALS['uredjaji'][5][1];
 	}
 
 	// Vraća režim rada grejnog tela
-	// 0 - Autonoman rad, 1 - Ručno, 2 - Dan,
-	// 3 - Noć, 4 - Zaštita od zamrzavanja
+	// 0 - Autonoman rad
+	// 1 - Ručni režim
+	// 2 - Dan,
+	// 3 - Noć
+	// 4 - Zaštita od zamrzavanja
+	
 	function getMode() {
-		return intval($GLOBALS['uredjaji'][6][1]);
+		return $GLOBALS['uredjaji'][6][1];
 	}
 
 	// Postavljanja režima rada grejnog tela
@@ -31,7 +35,7 @@
 				setTemp(floatval(TEMP_NOCNA));
 				break;
 			case 4:
-				setTemp(intval(TEMP_ODRZAVANJE));
+				setTemp(floatval(TEMP_ODRZAVANJE));
 				break;
 		}
 
@@ -39,12 +43,12 @@
 		upis();
 	}
 
-	// NOTE: Shodno mogućnostima hardvera, inkrementacija i dekrementacija
-	// se vrše u intervalima od 0.5°C!
+	// NOTE: Shodno mogućnostima grejnog tela, 
+	// inkrementacija i dekrementacija se vrše u intervalima od 0.5°C!
 
 	function increment() {
 		if (thermalStatus() == 1 && floatval(getTemp()) < 27) {
-			$GLOBALS['uredjaji'][5][1] = getTemp() + 0.5;
+			$GLOBALS['uredjaji'][5][1] = floatval(getTemp()) + 0.5;
 			exec("gpio write ".GPIO_TERMO_INC." 0 && sleep 0.1 && gpio write ".GPIO_TERMO_INC." 1 2>&1");
 			upis();
 		}
@@ -52,7 +56,7 @@
 
 	function decrement() {
 		if (thermalStatus() == 1 && floatval(getTemp()) > 7) {
-			$GLOBALS['uredjaji'][5][1] = getTemp() - 0.5;
+			$GLOBALS['uredjaji'][5][1] = floatval(getTemp()) - 0.5;
 			exec("gpio write ".GPIO_TERMO_DEC." 0 && sleep 0.1 && gpio write ".GPIO_TERMO_DEC." 1 2>&1");
 			upis();
 		}

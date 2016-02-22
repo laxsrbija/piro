@@ -1,5 +1,5 @@
 <?php
-	//ini_set('display_errors', 1);
+	// ini_set('display_errors', 1);
 
 	require ("piro-config.php");
 	require ("manipulator.php");
@@ -8,17 +8,13 @@
 	require ("weather.php");
 	require ("shell-commands.php");
 
-	// piro-querry.php?f=ASD&arg=99
-
-	// Preuzimanje parametra i argumenta iz URL adrese
-	$q = $_REQUEST["f"];
-	$arg = $_REQUEST["arg"];
+	// piro-query.php?f=funkcija&arg=parametar
 
 	// NOTE: Svaka izmena funkcija u posebnim
 	// modulima mora biti primenjena i ovde!
 
-	// Odabir funkcije
-	switch ($q) {
+	// Odabir funkcije na osnovu parametra iz URL-a
+	switch ($_REQUEST["f"]) {
 		case "thermalStatus":
 			echo thermalStatus();
 			break;
@@ -29,7 +25,7 @@
 			echo getMode();
 			break;
 		case "setMode":
-			setMode($arg);
+			setMode($_REQUEST["arg"]);
 			break;
 		case "increment":
 			increment();
@@ -41,13 +37,13 @@
 			toggleThermal();
 			break;
 		case "getRelayStatus":
-			echo getRelayStatus($arg);
+			echo getRelayStatus($_REQUEST["arg"]);
 			break;
 		case "toggleRelay":
-			toggleRelay($arg);
+			toggleRelay($_REQUEST["arg"]);
 			break;
 		case "azurirajVreme":
-			echo azurirajVreme($arg);
+			echo azurirajVreme($_REQUEST["arg"]);
 			break;
 		case "getWTemp":
 			echo getWTemp();
@@ -104,4 +100,5 @@
 			autoTemp();
 			break;
 	}
+	
 ?>

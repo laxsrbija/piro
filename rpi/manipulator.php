@@ -10,8 +10,9 @@
 		$uredjaji[$xml_len++][1] = $i->status;
 	}
 
+	// Upis u XML datoteku
 	function upis() {
-		$xml_upis = fopen("piro.xml","w");
+		$xml_upis = fopen("piro.xml", "w");
 
 		$podaci = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<piro>";		
 		for($i = 0; $i < $GLOBALS['xml_len']; $i++) {

@@ -1,18 +1,22 @@
 <?php
 
-	// 0 - Glavni LED paneli, 1 - Desni LED paneli
+	// 0 - Glavni LED paneli
+	// 1 - Desni LED paneli
 	// 2 - Levi LED paneli
 
 	// Vraća stanje uređaja
 	function getRelayStatus($a) {
-		return intval($GLOBALS['uredjaji'][intval($a)][1]);
+		return $GLOBALS['uredjaji'][$a][1];
 	}
 
 	function toggleRelay($a) {
-		if ($a != 2) { // TODO Kako relej za leve panele još uvek nije dostupan
-					   // koristi se dati kod da preskoči njegove kontrole
+		
+		// TODO Kako relej za leve panele još uvek nije dostupan
+		// koristi se dati kod da preskoči njegove kontrole
+		if ($a != 2) { 
+		
 			if (getRelayStatus($a) == 1) {
-				$GLOBALS['uredjaji'][intval($a)][1] = 0;
+				$GLOBALS['uredjaji'][$a][1] = 0;
 				
 				switch($a) {
 					case 0:
@@ -26,7 +30,7 @@
 				autoTemp();
 			}
 			else {
-				$GLOBALS['uredjaji'][intval($a)][1] = 1;
+				$GLOBALS['uredjaji'][$a][1] = 1;
 				
 				switch($a) {
 					case 0:
@@ -40,16 +44,16 @@
 		}
 		else {
 			if (getRelayStatus($a) == 1) 
-				$GLOBALS['uredjaji'][intval($a)][1] = 0;
+				$GLOBALS['uredjaji'][$a][1] = 0;
 			else 
-				$GLOBALS['uredjaji'][intval($a)][1] = 1;
+				$GLOBALS['uredjaji'][$a][1] = 1;
 		}
 
 		upis();
 	}
 
 	function getPCStatus() {
-		return intval($GLOBALS['uredjaji'][3][1]);
+		return $GLOBALS['uredjaji'][3][1];
 	}
 
 	function togglePC() {
