@@ -6,7 +6,7 @@
 	</uredjaj>
 	<uredjaj>
 		<id>led_desno</id>
-		<status>1</status>
+		<status>0</status>
 	</uredjaj>
 	<uredjaj>
 		<id>led_levo</id>
@@ -30,51 +30,51 @@
 	</uredjaj>
 	<uredjaj>
 		<id>vreme_azurirano</id>
-		<status>1451871346</status>
+		<status>1456071911</status>
 	</uredjaj>
 	<uredjaj>
 		<id>vreme_curr_temp</id>
-		<status>-10</status>
+		<status>11</status>
 	</uredjaj>
 	<uredjaj>
 		<id>vreme_stanje</id>
-		<status>Oblačno</status>
+		<status>Delimično oblačno</status>
 	</uredjaj>
 	<uredjaj>
 		<id>vreme_ikona</id>
-		<status>cloudy</status>
+		<status>partlycloudy</status>
 	</uredjaj>
 	<uredjaj>
 		<id>vreme_max_temp</id>
-		<status>-2</status>
+		<status>12</status>
 	</uredjaj>
 	<uredjaj>
 		<id>vreme_min_temp</id>
-		<status>-8</status>
+		<status>4</status>
 	</uredjaj>
 	<uredjaj>
 		<id>vreme_ikona_dnevna</id>
-		<status>snow</status>
+		<status>chancerain</status>
 	</uredjaj>
 	<uredjaj>
 		<id>vreme_verovatnoca_padavina</id>
-		<status>100</status>
+		<status>50</status>
 	</uredjaj>
 	<uredjaj>
 		<id>vreme_vidljivost</id>
-		<status>10.0</status>
+		<status>10 km</status>
 	</uredjaj>
 	<uredjaj>
 		<id>subjektivni_osecaj</id>
-		<status>-13</status>
+		<status>11</status>
 	</uredjaj>
 	<uredjaj>
 		<id>naziv_dana</id>
-		<status>Ponedeljak</status>
+		<status>Nedelja</status>
 	</uredjaj>
 	<uredjaj>
 		<id>vreme_opis_dnevna</id>
-		<status>Sneg</status>
+		<status>Moguća kiša</status>
 	</uredjaj>
 	<uredjaj>
 		<id>vreme_uv</id>
