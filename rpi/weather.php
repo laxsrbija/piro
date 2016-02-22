@@ -17,12 +17,12 @@
 				'А','Б','В','Г','Д','Ђ','Е','Ж','З','И','Ј','К','Л','Љ',
 				'М','Н','Њ','О','П','Р','С','Т','Ћ','У','Ф','Х','Ц','Ч','Џ','Ш');
 
-        $lat = array('a','b','v','g','d','đ','e','ž','z','i','j','k','l','lj',
+		$lat = array('a','b','v','g','d','đ','e','ž','z','i','j','k','l','lj',
 				'm','n','nj','o','p','r','s','t','ć','u','f','h','c','č','dž','š',
 				'A','B','V','G','D','Đ','E','Ž','Z','I','J','K','L','Lj',
 				'M','N','Nj','O','P','R','S','T','Ć','U','F','H','C','Č','Dž','Š');
 
-		// Kako ne bi došlo do prekoračenja upotrebe API zahteva,
+		// Kako ne bi došlo do prevelikog broja API zahteva,
 		// vreme se ažurira jednom u 5 minuta
 		if (time() - intval($GLOBALS['uredjaji'][7][1]) >= 300 || strcmp($a, "force") == 0) {
 			$xml = simplexml_load_string(file_get_contents($apiURL));
