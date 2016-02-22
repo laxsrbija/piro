@@ -9,12 +9,12 @@ document.onreadystatechange = function () {
 			document.getElementById("interactive");
 			document.getElementById("load").style.visibility = "hidden";
 			document.getElementById("kontejner").style.visibility = "visible";
- 		}, 1200);
+ 		}, 1500);
 	}
 }
 
 function racunarToggle() {
-	piroQuery("togglePC", "-1", "-1");
+	piroQueryNA("togglePC", "-1");
 
 	if (document.getElementById("racunar-status").innerHTML == "Računar je isključen.") {
 		document.getElementById("racunar-taster").innerHTML = "ISKLJUČI";
@@ -44,9 +44,9 @@ function rasvetaToggle(k) {
 
 }
 
-// Učitati status i  temperaturu peći
+// Učitatavanje statusa i temperature peći
 function ucitajTempStatus() {
-	piroQuery("thermalStatus", "-1", function() {
+	piroQueryNA("thermalStatus", function() {
 			if (this.responseText == 0) {
 				document.getElementById("grejanje-vrednost").innerHTML = "Isklj.";
 
@@ -54,7 +54,7 @@ function ucitajTempStatus() {
 					document.getElementById("grejanje-" + i + "-taster").src = "img/grejanje-" + i + ".png";
 			}
 			else {
-				piroQuery("getTemp", "-1", function() {
+				piroQueryNA("getTemp", function() {
 						document.getElementById("grejanje-vrednost").innerHTML = this.responseText + "°";
 						getThermalMode();
 					}
@@ -66,14 +66,14 @@ function ucitajTempStatus() {
 
 // Paljenje i gašenje grejnog tela
 function grejanjeToggle() {
-	piroQuery("toggleThermal", "-1", function() {
+	piroQueryNA("toggleThermal", function() {
 		ucitajTempStatus();
 	});
 }
 
 // Učitavanje režima rada
 function getThermalMode() {
-	piroQuery("getMode", "-1", function() {
+	piroQueryNA("getMode", function() {
 			for (var i = 1; i <= 5; i++)
 				document.getElementById("grejanje-" + i + "-taster").src = "img/grejanje-" + i + ".png";
 
@@ -94,7 +94,7 @@ function setThermalMode(arg) {
 // Inkrementacija temperature
 function povecajTemperaturu() {
 	if (document.getElementById("grejanje-vrednost").innerHTML != "Isklj.")
-		piroQuery("increment", "-1", function() {
+		piroQueryNA("increment", function() {
 				ucitajTempStatus();
 				setThermalMode(1);
 			}
@@ -104,7 +104,7 @@ function povecajTemperaturu() {
 // Dekrementacija temperature
 function smanjiTemperaturu() {
 	if (document.getElementById("grejanje-vrednost").innerHTML != "Isklj.")
-		piroQuery("decrement", "-1", function() {
+		piroQueryNA("decrement", function() {
 				ucitajTempStatus();
 				setThermalMode(1);
 			}

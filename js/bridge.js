@@ -1,8 +1,23 @@
-// Osnovna funkcija za komuniciranje sa PHP datotekama
+// Komunikacija sa serverom
+// Funkcija za slanje zahteva sa parametrom
 function piroQuery(q, arg, callback) {
 	var xmlhttp = new XMLHttpRequest();
 
 	xmlhttp.open("GET", "rpi/piro-query.php?f=" + q + "&arg=" + arg, true);
+
+	xmlhttp.onreadystatechange = function() {
+		if (xmlhttp.readyState == 4 && xmlhttp.status == 200 && typeof callback == "function")
+			callback.apply(xmlhttp);
+	}
+
+	xmlhttp.send();
+}
+
+// Funkcija za slanje zahteva bez parametara
+function piroQueryNA(q, callback) {
+	var xmlhttp = new XMLHttpRequest();
+
+	xmlhttp.open("GET", "rpi/piro-query.php?f=" + q, true);
 
 	xmlhttp.onreadystatechange = function() {
 		if (xmlhttp.readyState == 4 && xmlhttp.status == 200 && typeof callback == "function")
@@ -18,7 +33,7 @@ function ucitajVreme(arg) {
 
 		var statusDana = jsonSS();
 
-		piroQuery("getUV", "-1", function() {
+		piroQueryNA("getUV", function() {
 				var uvStepen;
 				var uvIndeks = this.responseText;
 
@@ -38,37 +53,37 @@ function ucitajVreme(arg) {
 			}
 		);
 
-		piroQuery("getWTemp", "-1", function() {
+		piroQueryNA("getWTemp", function() {
 				document.getElementById("prognoza-vrednost").innerHTML = this.responseText + "°";
 			}
 		);
 
-		piroQuery("getIcon", "-1", function() {
+		piroQueryNA("getIcon", function() {
 				document.getElementById("prognoza-ikona").src = "http://icons.wxug.com/i/c/v2/"
 				+ statusDana + this.responseText + ".svg";
 			}
 		);
 
-		piroQuery("getDesc", "-1", function() {
+		piroQueryNA("getDesc", function() {
 				document.getElementById("prognoza-opis").innerHTML = this.responseText;
 			}
 		);
 
-		piroQuery("getIconDaily", "-1", function() {
+		piroQueryNA("getIconDaily", function() {
 				document.getElementById("prognoza-ikona-dnevna").src = "http://icons.wxug.com/i/c/v2/"
 				+ statusDana + this.responseText + ".svg";
 			}
 		);
 
-		piroQuery("getNazivDana", "-1", function() {
+		piroQueryNA("getNazivDana", function() {
 				document.getElementById("prognoza-dan").innerHTML = this.responseText;
 			}
 		);
 
-		piroQuery("getMaxTemp", "-1", function() {
+		piroQueryNA("getMaxTemp", function() {
 				var tmp = this.responseText;
 
-				piroQuery("getMinTemp", "-1", function() {
+				piroQueryNA("getMinTemp", function() {
 						document.getElementById("prognoza-dnevna-vrednost").innerHTML = tmp + "° / " + this.responseText + "°";
 					}
 				);
@@ -76,22 +91,22 @@ function ucitajVreme(arg) {
 			}
 		);
 
-		piroQuery("getDescDaily", "-1", function() {
+		piroQueryNA("getDescDaily", function() {
 				document.getElementById("prognoza-dnevna-opis").innerHTML = this.responseText;
 			}
 		);
 
-		piroQuery("getPadavine", "-1", function() {
+		piroQueryNA("getPadavine", function() {
 				document.getElementById("prognoza-ic-padavine").innerHTML = this.responseText + "%";
 			}
 		);
 
-		piroQuery("getSubTemp", "-1", function() {
+		piroQueryNA("getSubTemp", function() {
 				document.getElementById("prognoza-ic-subjektivniosecaj").innerHTML = this.responseText + "°";
 			}
 		);
 
-		piroQuery("getVisibility", "-1", function() {
+		piroQueryNA("getVisibility", function() {
 				document.getElementById("prognoza-ic-vidljivost").innerHTML = this.responseText;
 			}
 		);
@@ -104,6 +119,7 @@ function ucitajVreme(arg) {
 // Vraća "nt_" ukoliko jeste, ili "" ako nije
 function jsonSS() {
 	var trenutnoVreme = new Date();
+	
 	var objekatSS = new SunriseSunset(trenutnoVreme.getUTCFullYear(),
 		trenutnoVreme.getUTCMonth(), trenutnoVreme.getUTCDate(), 43.310383, 21.868767);
 
@@ -111,6 +127,7 @@ function jsonSS() {
 	var d = new Date();
 	document.getElementById("footer").innerHTML = "Copyright © " + d.getUTCFullYear() + " Lazar Stanojević. Sva prava zadržana.";
 
+	// Parametar 1 označava GMT+1 vremensku zonu
 	if (trenutnoVreme.getHours() >= objekatSS.sunriseLocalHours(1)
 		&& trenutnoVreme.getHours() <= objekatSS.sunsetLocalHours(1))
 		return "";
@@ -124,7 +141,7 @@ function lokalniUredjaji() {
 	ucitajTempStatus();
 
 	// Učitati status računara
-	piroQuery("getPCStatus", "-1", function() {
+	piroQueryNA("getPCStatus", function() {
 			if (this.responseText == 1) {
 				document.getElementById("racunar-taster").innerHTML = "ISKLJUČI";
 				document.getElementById("racunar-kuler").src = "img/fan-rot.gif";
@@ -160,16 +177,17 @@ function lokalniUredjaji() {
 	}
 
 	// Učitava temperaturu sistema
-	piroQuery("getShellTemp", "-1", function() {
+	piroQueryNA("getShellTemp", function() {
 			document.getElementById("status-temperatura").innerHTML = "Temperatura servera: " + this.responseText + "°C";
 		}
 	);
 
-	// Učitava temperaturu sistema
-	piroQuery("getUptime", "-1", function() {
+	// Učitava operativno vreme
+	piroQueryNA("getUptime", function() {
 			if (this.responseText != 0) {
 				document.getElementById("status-uptime").innerHTML = "Operativno vreme: " + this.responseText + " dan";
 
+				// X dan(a)
 				if (this.responseText[this.responseText.length-1] != "1"
 					|| this.responseText.lastIndexOf("11") != -1 && this.responseText.length - 2 == this.responseText.lastIndexOf("11"))
 					document.getElementById("status-uptime").innerHTML += "a";
@@ -179,7 +197,7 @@ function lokalniUredjaji() {
 		}
 	);
 
-	piroQuery("getLoadAvg", "-1", function() {
+	piroQueryNA("getLoadAvg", function() {
 			document.getElementById("status-opterecenje").innerHTML =
 				"Prosečno opterećenje servera: " + parseInt(this.responseText) + "%";
 		}
