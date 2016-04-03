@@ -1,5 +1,9 @@
 <?php
 
+	// TODO: Omogućiti jednokratno podešavanje grada, 
+	// na osnovu koga se kasnije vade podaci o koordinatama i
+	// nazivu grada koji se koriste u drugim delovima sistema.
+
 	// WeatherUnderground API Key
 	define("WU_API_KEY", "WeatherUnderground API Key");
 
