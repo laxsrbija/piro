@@ -18,19 +18,19 @@
 	</uredjaj>
 	<uredjaj>
 		<id>pec_status</id>
-		<status>1</status>
+		<status>0</status>
 	</uredjaj>
 	<uredjaj>
 		<id>pec_temperatura</id>
-		<status>21.5</status>
+		<status>19.5</status>
 	</uredjaj>
 	<uredjaj>
 		<id>pec_mod</id>
-		<status>2</status>
+		<status>3</status>
 	</uredjaj>
 	<uredjaj>
 		<id>vreme_azurirano</id>
-		<status>1456071911</status>
+		<status>1459719462</status>
 	</uredjaj>
 	<uredjaj>
 		<id>vreme_curr_temp</id>
@@ -38,27 +38,27 @@
 	</uredjaj>
 	<uredjaj>
 		<id>vreme_stanje</id>
-		<status>Delimično oblačno</status>
+		<status>Vedro</status>
 	</uredjaj>
 	<uredjaj>
 		<id>vreme_ikona</id>
-		<status>partlycloudy</status>
+		<status>nt_clear</status>
 	</uredjaj>
 	<uredjaj>
 		<id>vreme_max_temp</id>
-		<status>12</status>
+		<status>23</status>
 	</uredjaj>
 	<uredjaj>
 		<id>vreme_min_temp</id>
-		<status>4</status>
+		<status>9</status>
 	</uredjaj>
 	<uredjaj>
 		<id>vreme_ikona_dnevna</id>
-		<status>chancerain</status>
+		<status>nt_clear</status>
 	</uredjaj>
 	<uredjaj>
 		<id>vreme_verovatnoca_padavina</id>
-		<status>50</status>
+		<status>0</status>
 	</uredjaj>
 	<uredjaj>
 		<id>vreme_vidljivost</id>
@@ -74,10 +74,10 @@
 	</uredjaj>
 	<uredjaj>
 		<id>vreme_opis_dnevna</id>
-		<status>Moguća kiša</status>
+		<status>Vedro</status>
 	</uredjaj>
 	<uredjaj>
 		<id>vreme_uv</id>
-		<status>0</status>
+		<status>-1</status>
 	</uredjaj>
 </piro>

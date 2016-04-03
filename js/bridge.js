@@ -31,8 +31,6 @@ function piroQueryNA(q, callback) {
 function ucitajVreme(arg) {
 	piroQuery("azurirajVreme", arg, function() {
 
-		var statusDana = jsonSS();
-
 		piroQueryNA("getUV", function() {
 				var uvStepen;
 				var uvIndeks = this.responseText;
@@ -60,7 +58,7 @@ function ucitajVreme(arg) {
 
 		piroQueryNA("getIcon", function() {
 				document.getElementById("prognoza-ikona").src = "http://icons.wxug.com/i/c/v2/"
-				+ statusDana + this.responseText + ".svg";
+				+ this.responseText + ".svg";
 			}
 		);
 
@@ -71,7 +69,7 @@ function ucitajVreme(arg) {
 
 		piroQueryNA("getIconDaily", function() {
 				document.getElementById("prognoza-ikona-dnevna").src = "http://icons.wxug.com/i/c/v2/"
-				+ statusDana + this.responseText + ".svg";
+				+ this.responseText + ".svg";
 			}
 		);
 
@@ -113,26 +111,6 @@ function ucitajVreme(arg) {
 
 	});
 
-}
-
-// Proverava da li je zašlo sunce
-// Vraća "nt_" ukoliko jeste, ili "" ako nije
-function jsonSS() {
-	var trenutnoVreme = new Date();
-	
-	var objekatSS = new SunriseSunset(trenutnoVreme.getUTCFullYear(),
-		trenutnoVreme.getUTCMonth(), trenutnoVreme.getUTCDate(), 43.310383, 21.868767);
-
-	// Učitavanje footera o istom trošku stvaranja Date objekta
-	var d = new Date();
-	document.getElementById("footer").innerHTML = "Copyright © " + d.getUTCFullYear() + " Lazar Stanojević. Sva prava zadržana.";
-
-	// Parametar 1 označava GMT+1 vremensku zonu
-	if (trenutnoVreme.getHours() >= objekatSS.sunriseLocalHours(1)
-		&& trenutnoVreme.getHours() <= objekatSS.sunsetLocalHours(1))
-		return "";
-	else
-		return "nt_";
 }
 
 function lokalniUredjaji() {
@@ -209,6 +187,8 @@ function inicijalnoPokretanje() {
 
 	// Poziva funkciju za učitavanje vremena
 	ucitajVreme("Redovno");
+	
+	document.getElementById("footer").innerHTML = "Copyright © " + (new Date()).getUTCFullYear() + " Lazar Stanojević. Sva prava zadržana.";
 
 	lokalniUredjaji();
 

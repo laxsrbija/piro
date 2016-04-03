@@ -42,7 +42,7 @@
 				$GLOBALS['uredjaji'][9][1] =  str_replace("Malo", "Mestimično", $temp);
 
 				// Cuvanje ikone uslova
-				$GLOBALS['uredjaji'][10][1] = $xml->current_observation->icon;
+				$GLOBALS['uredjaji'][10][1] = getSunlightStatus().$xml->current_observation->icon;
 
 				// Cuvanje maksimalne dnevne temperature
 				$GLOBALS['uredjaji'][11][1] = $xml2->forecast->simpleforecast->forecastdays->forecastday[0]->high->celsius;
@@ -51,7 +51,7 @@
 				$GLOBALS['uredjaji'][12][1] = $xml2->forecast->simpleforecast->forecastdays->forecastday[0]->low->celsius;
 
 				// Cuvanje ikone dnevnih uslova
-				$GLOBALS['uredjaji'][13][1] = $xml2->forecast->simpleforecast->forecastdays->forecastday[0]->icon;
+				$GLOBALS['uredjaji'][13][1] = getSunlightStatus().$xml2->forecast->simpleforecast->forecastdays->forecastday[0]->icon;
 
 				// Cuvanje dnevne verovatnoce padavina
 				$GLOBALS['uredjaji'][14][1] = $xml2->forecast->simpleforecast->forecastdays->forecastday[0]->pop;
@@ -90,6 +90,17 @@
 		}
 
 		return "GREŠKA: ".((time()-$GLOBALS['uredjaji'][7][1]) / 60);
+	}
+	
+	function getSunlightStatus() {
+		$trenutnoVreme = microtime(true);
+		$zalazak = date_sunset(time(),SUNFUNCS_RET_TIMESTAMP,43.3246,21.903,90,1);
+		$izlazak = date_sunrise(time(),SUNFUNCS_RET_TIMESTAMP,43.3246,21.903,90,1);
+		
+		if ($trenutnoVreme >= $izlazak && $trenutnoVreme <= $zalazak)
+			return "";
+		
+		return "nt_";
 	}
 
 	function getWTemp() {
