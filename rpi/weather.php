@@ -4,11 +4,8 @@
 	// U tom slucaju se vreme ažurira čak i kada je prošlo manje od 5 minuta od poslednje provere
 	function azurirajVreme($a) {
 
-		// WUnderground API URL za trenutne uslove
-		$apiURL = "http://api.wunderground.com/api/".WU_API_KEY."/conditions/lang:SR/q/Serbia/Nis.xml";
-
-		// WUnderground API URL za prognozu
-		$apiURLDaily = "http://api.wunderground.com/api/".WU_API_KEY."/forecast/lang:SR/q/Serbia/Nis.xml";
+		// WUnderground API URL za trenutne uslove i trodnevnu prognozu
+		$apiURL = "http://api.wunderground.com/api/".WU_API_KEY."/conditions/forecast/lang:SR/q/Serbia/Nis.xml";
 
 		// Pošto WU vraća opis na ćirilici, a želim da budem perfekcionista i održim
 		// celu aplikaciju na latinici, čekalo me je žestoko (i delimično nepotrebno) kucanje
@@ -45,16 +42,16 @@
 				$GLOBALS['uredjaji'][10][1] = getSunlightStatus().$xml->current_observation->icon;
 
 				// Cuvanje maksimalne dnevne temperature
-				$GLOBALS['uredjaji'][11][1] = $xml2->forecast->simpleforecast->forecastdays->forecastday[0]->high->celsius;
+				$GLOBALS['uredjaji'][11][1] = $xml->forecast->simpleforecast->forecastdays->forecastday[0]->high->celsius;
 
 				// Cuvanje minimalne dnevne temperature
-				$GLOBALS['uredjaji'][12][1] = $xml2->forecast->simpleforecast->forecastdays->forecastday[0]->low->celsius;
+				$GLOBALS['uredjaji'][12][1] = $xml->forecast->simpleforecast->forecastdays->forecastday[0]->low->celsius;
 
 				// Cuvanje ikone dnevnih uslova
-				$GLOBALS['uredjaji'][13][1] = getSunlightStatus().$xml2->forecast->simpleforecast->forecastdays->forecastday[0]->icon;
+				$GLOBALS['uredjaji'][13][1] = getSunlightStatus().$xml->forecast->simpleforecast->forecastdays->forecastday[0]->icon;
 
 				// Cuvanje dnevne verovatnoce padavina
-				$GLOBALS['uredjaji'][14][1] = $xml2->forecast->simpleforecast->forecastdays->forecastday[0]->pop;
+				$GLOBALS['uredjaji'][14][1] = $xml->forecast->simpleforecast->forecastdays->forecastday[0]->pop;
 
 				// Cuvanje trenutne vidljivosti
 				if (strcmp($xml->current_observation->visibility_km, "N/A")) {
@@ -73,11 +70,11 @@
 
 				// Cuvanje naziva dana
 				$GLOBALS['uredjaji'][17][1] =
-					str_replace($cyr, $lat, $xml2->forecast->txt_forecast->forecastdays->forecastday[0]->title);
+					str_replace($cyr, $lat, $xml->forecast->txt_forecast->forecastdays->forecastday[0]->title);
 
 				// Cuvanje opisa dnevnih vremenskih uslova
 				$GLOBALS['uredjaji'][18][1] =
-					str_replace($cyr, $lat, $xml2->forecast->simpleforecast->forecastdays->forecastday[0]->conditions);
+					str_replace($cyr, $lat, $xml->forecast->simpleforecast->forecastdays->forecastday[0]->conditions);
 
 				// Cuvanje vrednosti UV indeksa
 				$GLOBALS['uredjaji'][19][1] = $xml->current_observation->UV;
@@ -93,6 +90,8 @@
 	}
 	
 	function getSunlightStatus() {
+		// Provera da li se trenutno vreme nalazi izmedju vremena izlaska i zalaska sunca.
+		// Koristi UNIX timestamp
 		$trenutnoVreme = microtime(true);
 		$zalazak = date_sunset(time(),SUNFUNCS_RET_TIMESTAMP,43.3246,21.903,90,1);
 		$izlazak = date_sunrise(time(),SUNFUNCS_RET_TIMESTAMP,43.3246,21.903,90,1);
