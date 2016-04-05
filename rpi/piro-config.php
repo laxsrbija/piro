@@ -4,8 +4,8 @@
 	define("WU_API_KEY", "WeatherUnderground API Key");
 	
 	// Ime zemlje i naziv grada za koji se prikazuje vremenska prognoza
-	define("WU_CITY","Nis");
-	define("WU_COUNTRY","Serbia");
+	define("WU_CITY", "Nis");
+	define("WU_COUNTRY", "Serbia");
 	
 	// Jezik vremenske prognoze
 	define("WU_LANG", "SR");
