@@ -11,13 +11,14 @@
 		<script type="text/javascript" src="js/piro.js"></script>
 		<script type="text/javascript" src="js/bridge.js"></script>
 		<script src="../dist/sweetalert.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="../dist/sweetalert.css">
+		<!-- <link rel="stylesheet" type="text/css" href="../dist/sweetalert.css"> -->
 		<link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
 	</head>
 	<body onLoad="inicijalnoPokretanje()">
 		<div id="nav">
 			<img src="img/logo.png" id="logo-nav">
 			<a href="#" id="podesavanja-nav" title="Podešavanja"><img src="img/podesavanja.png"></a>
+			<a href="https://www.wunderground.com/?apiref=bd0f471813b6ae6d" id="wu-nav" title="Weather Underground" target="_blank"><img src="img/wundergroundLogo_4c_rev.png"></a>
 		</div>
 		<div id="kontejner"><br>
 			<div class="razmak"></div>
@@ -27,8 +28,8 @@
 					<img id="prognoza-ikona" src="#">
 					<span id="prognoza-vrednost">--°</span>
 					<span id="prognoza-opis">--</span>
-					<a href="http://www.wunderground.com/weather-forecast/zmw:00000.1.13388?apiref=bd0f471813b6ae6d" target="_blank" id="prognoza-grad">Niš</a>
-					<a href="javascript:ucitajVreme('force')" id="prognoza-osvezi" title="Osveži"><img src="img/weather-refresh.png"></a>
+					<a href="http://www.wunderground.com/weather-forecast/zmw:00000.1.13388?apiref=bd0f471813b6ae6d" target="_blank" id="prognoza-grad">--</a>
+					<a href="javascript:ucitajVreme('force')" id="prognoza-osvezi" title="Osveži"><img src="img/weather-refresh.png" id="osvezi-str" class=""></a>
 					<span class="prognoza-ic-kontejner">
 						<span class="prognoza-ic" id="prognoza-ic-subjektivniosecaj" title="Subjektivni osećaj">--°</span>
 						<span class="prognoza-ic" id="prognoza-ic-vidljivost" title="Vidljivost">-- km</span>

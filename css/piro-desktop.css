@@ -36,9 +36,13 @@ body {
     left: 15px;
 }
 #podesavanja-nav {
-	opacity: 0.3;
-    position: absolute;
+	position: absolute;
     right: 20px;
+    top: 7px;
+}
+#wu-nav {
+	position: absolute;
+    right: 80px;
     top: 7px;
 }
 #podesavanja-nav:hover {
@@ -163,6 +167,26 @@ body {
     position: absolute;
     right: 7px;
     top: 7px;
+}
+@-webkit-keyframes spinnerRotate
+{
+    from{-webkit-transform:rotate(0deg);}
+    to{-webkit-transform:rotate(360deg);}
+}
+@-moz-keyframes spinnerRotate
+{
+    from{-moz-transform:rotate(0deg);}
+    to{-moz-transform:rotate(360deg);}
+}
+.osvezi-rot {
+    -webkit-animation-name: spinnerRotate;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    -moz-animation-name: spinnerRotate;
+    -moz-animation-duration: 1s;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
 }
 .prognoza-ic-kontejner {
     left: 2px;
