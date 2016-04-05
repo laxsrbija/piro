@@ -35,6 +35,15 @@ body {
     top: 6px;
     left: 15px;
 }
+#podesavanja-nav {
+	opacity: 0.3;
+    position: absolute;
+    right: 20px;
+    top: 7px;
+}
+#podesavanja-nav:hover {
+	opacity: 1;
+}
 .razmak {
     display: inline-block;
     height: 350px;
