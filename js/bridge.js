@@ -29,6 +29,8 @@ function piroQueryNA(q, callback) {
 
 // Funkcija za učitavanje vremena
 function ucitajVreme(arg) {
+	document.getElementById("osvezi-str").className = "osvezi-rot";
+	
 	piroQuery("azurirajVreme", arg, function() {
 
 		piroQueryNA("getUV", function() {
@@ -108,6 +110,8 @@ function ucitajVreme(arg) {
 				document.getElementById("prognoza-ic-vidljivost").innerHTML = this.responseText;
 			}
 		);
+		
+		document.getElementById("osvezi-str").className = "";
 
 	});
 
@@ -115,8 +119,14 @@ function ucitajVreme(arg) {
 
 function lokalniUredjaji() {
 
-	// Učitati status i  temperaturu peći
+	// Učitati status i temperaturu peći
 	ucitajTempStatus();
+	
+	// Učitati naziv grada
+	piroQueryNA("getCityName", function() {
+			document.getElementById("prognoza-grad").innerHTML = this.responseText;
+		}
+	);
 
 	// Učitati status računara
 	piroQueryNA("getPCStatus", function() {
