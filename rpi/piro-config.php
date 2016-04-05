@@ -1,11 +1,14 @@
 <?php
 
-	// TODO: Omogućiti jednokratno podešavanje grada, 
-	// na osnovu koga se kasnije vade podaci o koordinatama i
-	// nazivu grada koji se koriste u drugim delovima sistema.
-
 	// WeatherUnderground API Key
 	define("WU_API_KEY", "WeatherUnderground API Key");
+	
+	// Ime zemlje i naziv grada za koji se prikazuje vremenska prognoza
+	define("WU_CITY","Nis");
+	define("WU_COUNTRY","Serbia");
+	
+	// Jezik vremenske prognoze
+	define("WU_LANG", "SR");
 
 	// Konstante za dnevnu, noćnu i temperaturu održavanja
 	define("TEMP_DNEVNA", "21.5");

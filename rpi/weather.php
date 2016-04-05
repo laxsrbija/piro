@@ -5,7 +5,7 @@
 	function azurirajVreme($a) {
 
 		// WUnderground API URL za trenutne uslove i trodnevnu prognozu
-		$apiURL = "http://api.wunderground.com/api/".WU_API_KEY."/conditions/forecast/lang:SR/q/Serbia/Nis.xml";
+		$apiURL = "http://api.wunderground.com/api/".WU_API_KEY."/conditions/forecast/lang:".WU_LANG."/q/".WU_COUNTRY."/".WU_CITY.".xml";
 
 		// Pošto WU vraća opis na ćirilici, a želim da budem perfekcionista i održim
 		// celu aplikaciju na latinici, čekalo me je žestoko (i delimično nepotrebno) kucanje
