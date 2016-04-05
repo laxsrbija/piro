@@ -23,7 +23,6 @@
 		// vreme se ažurira jednom u 5 minuta
 		if (time() - intval($GLOBALS['data']['vremenska_prognoza']['vreme_azuriranja']) >= 300 || strcmp($a, "force") == 0) {
 			$xml = simplexml_load_string(file_get_contents($apiURL));
-			$xml2 = simplexml_load_string(file_get_contents($apiURLDaily));
 
 			// Provera da li je vreme ispravno učitano
 			if (strcmp($xml->current_observation->temp_c, "") != 0) {
@@ -31,13 +30,25 @@
 				// Cuvanje trenutnog vremena
 				$GLOBALS['data']['vremenska_prognoza']['vreme_azuriranja'] = time();
 				
-				// Cuvanje grada za koji se prognoza pikazuje
-				$GLOBALS['data']['vremenska_prognoza']['grad'] = 
-					str_replace($cyr, $lat, $xml->current_observation->display_location->city);
+				// Cuvanje grada za koji se prognoza pikazuje,
+				// kao i njegove geografske širine i dužine
+				if (strcmp($GLOBALS['data']['lokacija']['grad'], 
+					str_replace($cyr, $lat, $xml->current_observation->display_location->city))) {
+						
+						$GLOBALS['data']['lokacija']['grad'] = 
+							str_replace($cyr, $lat, $xml->current_observation->display_location->city);
+							
+						$GLOBALS['data']['lokacija']['geo_sirina'] = 
+							$xml->current_observation->display_location->latitude;
+							
+						$GLOBALS['data']['lokacija']['geo_duzina'] = 
+							$xml->current_observation->display_location->longitude;
+							
+				}
 
 				// Cuvanje trenutne temperature
 				$GLOBALS['data']['vremenska_prognoza']['trenutna_temperatura'] =  
-					$xml->current_observation->temp_c;
+					intval($xml->current_observation->temp_c);
 
 				// Cuvanje stringa sa opisom uslova
 				$temp = str_replace($cyr, $lat, $xml->current_observation->weather);
@@ -50,11 +61,11 @@
 
 				// Cuvanje maksimalne dnevne temperature
 				$GLOBALS['data']['vremenska_prognoza']['dnevna_max_temp'] = 
-					$xml->forecast->simpleforecast->forecastdays->forecastday[0]->high->celsius;
+					intval($xml->forecast->simpleforecast->forecastdays->forecastday[0]->high->celsius);
 
 				// Cuvanje minimalne dnevne temperature
 				$GLOBALS['data']['vremenska_prognoza']['dnevna_min_temp'] = 
-					$xml->forecast->simpleforecast->forecastdays->forecastday[0]->low->celsius;
+					intval($xml->forecast->simpleforecast->forecastdays->forecastday[0]->low->celsius);
 
 				// Cuvanje ikone dnevnih uslova
 				$GLOBALS['data']['vremenska_prognoza']['dnevna_ikona'] = 
@@ -106,8 +117,8 @@
 		// Provera da li se trenutno vreme nalazi izmedju vremena izlaska i zalaska sunca.
 		// Koristi UNIX timestamp
 		$trenutnoVreme = microtime(true);
-		$zalazak = date_sunset(time(),SUNFUNCS_RET_TIMESTAMP,43.3246,21.903,90,1);
-		$izlazak = date_sunrise(time(),SUNFUNCS_RET_TIMESTAMP,43.3246,21.903,90,1);
+		$zalazak = date_sunset(time(), SUNFUNCS_RET_TIMESTAMP, $GLOBALS['data']['lokacija']['geo_sirina'], $GLOBALS['data']['lokacija']['duzina'], 90, 1);
+		$izlazak = date_sunrise(time(), SUNFUNCS_RET_TIMESTAMP, $GLOBALS['data']['lokacija']['geo_sirina'], $GLOBALS['data']['lokacija']['duzina'], 90, 1);
 		
 		if ($trenutnoVreme >= $izlazak && $trenutnoVreme <= $zalazak)
 			return "";
@@ -164,7 +175,7 @@
 	}
 	
 	function getCityName() {
-		return $GLOBALS['data']['vremenska_prognoza']['grad'];
+		return $GLOBALS['data']['lokacija']['grad'];
 	}
 
 ?>
