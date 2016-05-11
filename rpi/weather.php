@@ -18,11 +18,15 @@
 				'm','n','nj','o','p','r','s','t','ć','u','f','h','c','č','dž','š',
 				'A','B','V','G','D','Đ','E','Ž','Z','I','J','K','L','Lj',
 				'M','N','Nj','O','P','R','S','T','Ć','U','F','H','C','Č','Dž','Š');
+				
+		$updated =0;
 
 		// Kako ne bi došlo do prevelikog broja API zahteva,
 		// vreme se ažurira jednom u 5 minuta
 		if (time() - intval($GLOBALS['data']['vremenska_prognoza']['vreme_azuriranja']) >= 300 || strcmp($a, "force") == 0) {
 			$xml = simplexml_load_string(file_get_contents($apiURL));
+			
+			$updated = 2;
 
 			// Provera da li je vreme ispravno učitano
 			if (strcmp($xml->current_observation->temp_c, "") != 0) {
@@ -104,13 +108,13 @@
 					$xml->current_observation->UV;
 
 				upis();
+				$updated = 3;
 
 			}
-
-			return "OK";
+			
 		}
 
-		return "GREŠKA: ".((time()-$GLOBALS['data']['vremenska_prognoza']['vreme_azuriranja']) / 60);
+		return $updated;
 	}
 	
 	function getSunlightStatus() {
@@ -171,7 +175,18 @@
 	}
 
 	function getUV() {
-		return $GLOBALS['data']['vremenska_prognoza']['uv_indeks'];
+		$uv = 0;
+		
+		if ($GLOBALS['data']['vremenska_prognoza']['uv_indeks'] >= 11)
+			$uv = 4;
+		else if ($GLOBALS['data']['vremenska_prognoza']['uv_indeks'] >= 8)
+			$uv = 3;
+		else if ($GLOBALS['data']['vremenska_prognoza']['uv_indeks'] >= 6)
+			$uv = 2;
+		else if ($GLOBALS['data']['vremenska_prognoza']['uv_indeks'] >= 3)
+			$uv = 1;
+		
+		return $uv;
 	}
 	
 	function getCityName() {
