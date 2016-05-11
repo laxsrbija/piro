@@ -1,18 +1,3 @@
-// Prikazivanje ikone dok se stranica u potpunosti ne učita
-document.onreadystatechange = function () {
-	var state = document.readyState
-	if (state == "interactive") {
-		document.getElementById("kontejner").style.visibility = "hidden";
-	}
-	else if (state == "complete") {
-		setTimeout(function() {
-			document.getElementById("interactive");
-			document.getElementById("load").style.visibility = "hidden";
-			document.getElementById("kontejner").style.visibility = "visible";
- 		}, 1000);
-	}
-}
-
 function racunarToggle() {
 	piroQueryNA("togglePC", "-1");
 
@@ -32,7 +17,7 @@ function racunarToggle() {
 
 function rasvetaToggle(k) {
 	piroQuery("toggleRelay", k, "-1");
-
+	
 	if (document.getElementById("rasv-" + k + "-taster").innerHTML == "UKLJUČI") {
 		document.getElementById("rasv-" + k + "-taster").innerHTML = "ISKLJUČI";
 		document.getElementById("rasv-" + k + "-taster").className = "rasv-" + k + "-taster ukljuceno";
@@ -109,4 +94,14 @@ function smanjiTemperaturu() {
 				setThermalMode(1);
 			}
 		);
+}
+
+function checkMode(a, b) {
+	if (a == 1)
+		document.getElementById("grejanje-" + b + "-taster").src = "img/grejanje-" + b + "-s.png";
+}
+
+function uptimeFormatter(a) {
+	if (a > 0 && (a[a.length - 1] != "1" || a.lastIndexOf("11") != -1 && a.length - 2 == a.lastIndexOf("11")))
+		document.getElementById("status-uptime").innerHTML += "a";
 }
