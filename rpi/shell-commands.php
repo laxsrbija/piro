@@ -20,7 +20,7 @@
 	// Vraća prosečno opterećenje sistema u zadnjih 10 minuta
 	function getLoadAvg() {
 		exec("uptime | sed 's/.*load average: //' | awk -F\, '{print $2}' 2>&1", $tmp);
-        return str_replace(".", "", $tmp[0]);
+        return intval(str_replace(".", "", $tmp[0]));
 	}
 
 ?>
