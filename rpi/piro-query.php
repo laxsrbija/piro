@@ -102,6 +102,21 @@
 		case "autoTemp":
 			autoTemp();
 			break;
+		case "getJSON":
+			echo getJSON($_REQUEST["arg"]);
+			break;
+	}
+	
+	function getJSON($a) {
+		azurirajVreme($a);
+		
+		return "{ "."\"ledCentar\":\"".getRelayStatus(0)."\", \"ledDesno\":\"".getRelayStatus(1)."\", \"ledLevo\":\"".getRelayStatus(2)."\", \"racunar\":\""
+		.getPCStatus()."\", \"statusPeci\":\"".thermalStatus()."\", \"temperaturaPeci\":\"".getTemp()."\", \"rezimPeci\":\"".getMode()."\", \"grad\":\""
+		.getCityName()."\", \"trenutnaTemperatura\":\"".getWTemp()."\", \"trenutnaStanje\":\"".getDesc()."\", \"trenutnaIkona\":\""
+		.getIcon()."\", \"padavine\":\"".getPadavine()."\", \"vidljivost\":\"".getVisibility()."\", \"subjektivniOsecaj\":\""
+		.getSubTemp()."\", \"uvIndeks\":\"".getUV()."\", \"dan\":\"".getNazivDana()."\", \"dnevnaStanje\":\""
+		.getDescDaily()."\", \"dnevnaMax\":\"".getMaxTemp()."\", \"dnevnaMin\":\"".getMinTemp()."\", \"dnevnaIkona\":\""
+		.getIconDaily()."\", \"systemUptime\":\"".getUptime()."\", \"systemTemperature\":\"".getShellTemp()."\", \"systemLoad\":\"".getLoadAvg()."\" }";
 	}
 	
 ?>
