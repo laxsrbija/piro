@@ -121,8 +121,8 @@
 		// Provera da li se trenutno vreme nalazi izmedju vremena izlaska i zalaska sunca.
 		// Koristi UNIX timestamp
 		$trenutnoVreme = microtime(true);
-		$zalazak = date_sunset(time(), SUNFUNCS_RET_TIMESTAMP, $GLOBALS['data']['lokacija']['geo_sirina'], $GLOBALS['data']['lokacija']['duzina'], 90, 1);
-		$izlazak = date_sunrise(time(), SUNFUNCS_RET_TIMESTAMP, $GLOBALS['data']['lokacija']['geo_sirina'], $GLOBALS['data']['lokacija']['duzina'], 90, 1);
+		$zalazak = date_sunset(time(), SUNFUNCS_RET_TIMESTAMP, $GLOBALS['data']['lokacija']['geo_sirina'], $GLOBALS['data']['lokacija']['geo_duzina'], 90, 1);
+		$izlazak = date_sunrise(time(), SUNFUNCS_RET_TIMESTAMP, $GLOBALS['data']['lokacija']['geo_sirina'], $GLOBALS['data']['lokacija']['geo_duzina'], 90, 1);
 		
 		if ($trenutnoVreme >= $izlazak && $trenutnoVreme <= $zalazak)
 			return "";
