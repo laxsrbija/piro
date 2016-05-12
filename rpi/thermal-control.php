@@ -24,23 +24,25 @@
 	// Postavljanja režima rada grejnog tela
 	function setMode($a) {
 		
-		switch($a) {
-			case 1:
-				autoTemp();
-				break;
-			case 2:
-				setTemp(floatval(TEMP_DNEVNA));
-				break;
-			case 3:
-				setTemp(floatval(TEMP_NOCNA));
-				break;
-			case 4:
-				setTemp(floatval(TEMP_ODRZAVANJE));
-				break;
-		}
+		if (thermalStatus() == 1) {		
+			switch($a) {
+				case 1:
+					autoTemp();
+					break;
+				case 2:
+					setTemp(floatval(TEMP_DNEVNA));
+					break;
+				case 3:
+					setTemp(floatval(TEMP_NOCNA));
+					break;
+				case 4:
+					setTemp(floatval(TEMP_ODRZAVANJE));
+					break;
+			}
 
-		$GLOBALS['data']['grejanje']['rezim_peci'] = intval($a);
-		upis();
+			$GLOBALS['data']['grejanje']['rezim_peci'] = intval($a);
+			upis();
+		}
 	}
 
 	// NOTE: Shodno mogućnostima grejnog tela, 
