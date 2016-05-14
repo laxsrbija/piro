@@ -17,12 +17,15 @@
 	// 3 - Noć
 	// 4 - Zaštita od zamrzavanja
 	
+	// Režim postavljen na "A" služi za pozive unutar
+	// Androida, nakon čega vraća trenutne parametre
+	
 	function getMode() {
 		return $GLOBALS['data']['grejanje']['rezim_peci'];
 	}
 
 	// Postavljanja režima rada grejnog tela
-	function setMode($a) {
+	function setMode($a, $mode = "R") {
 		
 		if (thermalStatus() == 1) {		
 			switch($a) {
@@ -43,29 +46,38 @@
 			$GLOBALS['data']['grejanje']['rezim_peci'] = intval($a);
 			upis();
 		}
+		
+		if (strcmp($mode, "A") == 0) 
+			return getJSONThermal();
 	}
 
 	// NOTE: Shodno mogućnostima grejnog tela, 
 	// inkrementacija i dekrementacija se vrše u intervalima od 0.5°C!
 
-	function increment() {
+	function increment($mode = "R") {
 		if (thermalStatus() == 1 && floatval(getTemp()) < 27) {
 			$GLOBALS['data']['grejanje']['temperatura_peci'] = floatval(getTemp()) + 0.5;
 			exec("gpio write ".GPIO_TERMO_INC." 0 && sleep 0.1 && gpio write ".GPIO_TERMO_INC." 1 2>&1");
 			upis();
 		}
+		
+		if (strcmp($mode, "A") == 0) 
+			return getJSONThermal();
 	}
 
-	function decrement() {
+	function decrement($mode = "R") {
 		if (thermalStatus() == 1 && floatval(getTemp()) > 7) {
 			$GLOBALS['data']['grejanje']['temperatura_peci'] = floatval(getTemp()) - 0.5;
 			exec("gpio write ".GPIO_TERMO_DEC." 0 && sleep 0.1 && gpio write ".GPIO_TERMO_DEC." 1 2>&1");
 			upis();
 		}
+		
+		if (strcmp($mode, "A") == 0) 
+			return getJSONThermal();
 	}
 
 	// Paljenje i gašenje grejnog tela
-	function toggleThermal() {
+	function toggleThermal($mode = "R") {
 		if (thermalStatus() == 1)
 			$GLOBALS['data']['grejanje']['status_peci'] = 0;
 		else
@@ -74,6 +86,9 @@
 		exec("gpio write ".GPIO_TERMO_PWR." 0 && sleep 0.1 && gpio write ".GPIO_TERMO_PWR." 1 2>&1");
 
 		upis();
+		
+		if (strcmp($mode, "A") == 0) 
+			return getJSONThermal();
 	}
 
 	// Postavlja temperaturu na određenu vrednost

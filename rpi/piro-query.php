@@ -1,5 +1,5 @@
 <?php
-	// ini_set('display_errors', 1);
+	ini_set('display_errors', 1);
 
 	require ("piro-config.php");
 	require ("dbrw.php");
@@ -7,7 +7,7 @@
 	require ("relay-control.php");
 	require ("weather.php");
 	require ("shell-commands.php");
-
+	
 	// piro-query.php?f=funkcija&arg=parametar
 
 	// NOTE: Svaka izmena funkcija u posebnim
@@ -25,16 +25,28 @@
 			echo getMode();
 			break;
 		case "setMode":
-			setMode($_REQUEST["arg"]);
+			if (isset($_REQUEST['m']))
+				echo setMode($_REQUEST["arg"], $_REQUEST['m']);
+			else
+				setMode($_REQUEST["arg"]);
 			break;
 		case "increment":
-			increment();
+			if (isset($_REQUEST['m']))
+				echo increment($_REQUEST['m']);
+			else
+				increment();
 			break;
 		case "decrement":
-			decrement();
+			if (isset($_REQUEST['m']))
+				echo decrement($_REQUEST['m']);
+			else
+				decrement();
 			break;
 		case "toggleThermal":
-			toggleThermal();
+			if (isset($_REQUEST['m']))
+				echo toggleThermal($_REQUEST['m']);
+			else
+				toggleThermal();
 			break;
 		case "getRelayStatus":
 			echo getRelayStatus($_REQUEST["arg"]);
@@ -105,6 +117,9 @@
 		case "getJSON":
 			echo getJSON($_REQUEST["arg"]);
 			break;
+		case "getJSONThermal":
+			echo getJSONThermal();
+			break;
 	}
 	
 	function getJSON($a) {
@@ -117,6 +132,10 @@
 		.getSubTemp()."\", \"uvIndeks\":\"".getUV()."\", \"dan\":\"".getNazivDana()."\", \"dnevnaStanje\":\""
 		.getDescDaily()."\", \"dnevnaMax\":\"".getMaxTemp()."\", \"dnevnaMin\":\"".getMinTemp()."\", \"dnevnaIkona\":\""
 		.getIconDaily()."\", \"systemUptime\":\"".getUptime()."\", \"systemTemperature\":\"".getShellTemp()."\", \"systemLoad\":\"".getLoadAvg()."\" }";
+	}
+	
+	function getJSONThermal() {
+		return "{ "."\"statusPeci\":\"".thermalStatus()."\", \"temperaturaPeci\":\"".getTemp()."\", \"rezimPeci\":\"".getMode()."\"}";
 	}
 	
 ?>
