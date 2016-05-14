@@ -34,7 +34,7 @@
 			<div>
 				<span class="prognoza">
 					<img title="UV indeks" src="img/uv-<?php echo getUV() ?>.png" id="prognoza-uv">
-					<img id="prognoza-ikona" src="http://icons.wxug.com/i/c/v4/<?php echo getIcon() ?>.svg">
+					<img id="prognoza-ikona" src="img/weather/svg/<?php echo getIcon() ?>.svg">
 					<span id="prognoza-vrednost"><?php echo getWTemp(); ?>°</span>
 					<span id="prognoza-opis"><?php echo getDesc(); ?></span>
 					<a href="http://www.wunderground.com/weather-forecast/zmw:00000.1.13388?apiref=bd0f471813b6ae6d" target="_blank" id="prognoza-grad"><?php echo getCityName() ?></a>
@@ -46,7 +46,7 @@
 					</span>
 					<hr>
 					<span id="prognoza-dan"><?php echo getNazivDana() ?></span>
-					<img id="prognoza-ikona-dnevna" src="http://icons.wxug.com/i/c/v4/<?php echo getIconDaily() ?>.svg">
+					<img id="prognoza-ikona-dnevna" src="img/weather/svg/<?php echo getIconDaily() ?>.svg">
 					<span id="prognoza-dnevna-vrednost"><?php echo getMaxTemp() ?>° / <?php echo getMinTemp() ?>°</span>
 					<span id="prognoza-dnevna-opis"><?php echo getDescDaily() ?></span>
 				</span>

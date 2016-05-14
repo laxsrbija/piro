@@ -48,7 +48,7 @@ function ucitajVreme(arg) {
 			);
 
 			piroQueryNA("getIcon", function() {
-					document.getElementById("prognoza-ikona").src = "http://icons.wxug.com/i/c/v4/"
+					document.getElementById("prognoza-ikona").src = "img/weather/svg/"
 					+ this.responseText + ".svg";
 				}
 			);
@@ -59,7 +59,7 @@ function ucitajVreme(arg) {
 			);
 
 			piroQueryNA("getIconDaily", function() {
-					document.getElementById("prognoza-ikona-dnevna").src = "http://icons.wxug.com/i/c/v4/"
+					document.getElementById("prognoza-ikona-dnevna").src = "img/weather/svg/"
 					+ this.responseText + ".svg";
 				}
 			);
