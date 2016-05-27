@@ -18,14 +18,14 @@
 				'm','n','nj','o','p','r','s','t','ć','u','f','h','c','č','dž','š',
 				'A','B','V','G','D','Đ','E','Ž','Z','I','J','K','L','Lj',
 				'M','N','Nj','O','P','R','S','T','Ć','U','F','H','C','Č','Dž','Š');
-				
+
 		$updated =0;
 
 		// Kako ne bi došlo do prevelikog broja API zahteva,
 		// vreme se ažurira jednom u 5 minuta
 		if (time() - intval($GLOBALS['data']['vremenska_prognoza']['vreme_azuriranja']) >= 300 || strcmp($a, "force") == 0) {
 			$xml = simplexml_load_string(file_get_contents($apiURL));
-			
+
 			$updated = 2;
 
 			// Provera da li je vreme ispravno učitano
@@ -33,66 +33,68 @@
 
 				// Cuvanje trenutnog vremena
 				$GLOBALS['data']['vremenska_prognoza']['vreme_azuriranja'] = time();
-				
+
 				// Cuvanje grada za koji se prognoza pikazuje,
 				// kao i njegove geografske širine i dužine
-				if (strcmp($GLOBALS['data']['lokacija']['grad'], 
+				if (strcmp($GLOBALS['data']['lokacija']['grad'],
 					str_replace($cyr, $lat, $xml->current_observation->display_location->city))) {
-						
-						$GLOBALS['data']['lokacija']['grad'] = 
+
+						$GLOBALS['data']['lokacija']['grad'] =
 							str_replace($cyr, $lat, $xml->current_observation->display_location->city);
-							
-						$GLOBALS['data']['lokacija']['geo_sirina'] = 
+
+						$GLOBALS['data']['lokacija']['geo_sirina'] =
 							$xml->current_observation->display_location->latitude;
-							
-						$GLOBALS['data']['lokacija']['geo_duzina'] = 
+
+						$GLOBALS['data']['lokacija']['geo_duzina'] =
 							$xml->current_observation->display_location->longitude;
-							
+
 				}
 
 				// Cuvanje trenutne temperature
-				$GLOBALS['data']['vremenska_prognoza']['trenutna_temperatura'] =  
+				$GLOBALS['data']['vremenska_prognoza']['trenutna_temperatura'] =
 					intval($xml->current_observation->temp_c);
 
 				// Cuvanje stringa sa opisom uslova
 				$temp = str_replace($cyr, $lat, $xml->current_observation->weather);
-				$GLOBALS['data']['vremenska_prognoza']['trenutna_stanje'] = 
+				$GLOBALS['data']['vremenska_prognoza']['trenutna_stanje'] =
 					str_replace("Malo", "Mestimično", $temp);
+				$GLOBALS['data']['vremenska_prognoza']['trenutna_stanje'] =
+					str_replace("oluja sa grmljavinom", "oluja", $GLOBALS['data']['vremenska_prognoza']['trenutna_stanje']);
 
 				// Cuvanje ikone uslova
-				$GLOBALS['data']['vremenska_prognoza']['trenutna_ikona'] = 
+				$GLOBALS['data']['vremenska_prognoza']['trenutna_ikona'] =
 					getSunlightStatus().$xml->current_observation->icon;
 
 				// Cuvanje maksimalne dnevne temperature
-				$GLOBALS['data']['vremenska_prognoza']['dnevna_max_temp'] = 
+				$GLOBALS['data']['vremenska_prognoza']['dnevna_max_temp'] =
 					intval($xml->forecast->simpleforecast->forecastdays->forecastday[0]->high->celsius);
 
 				// Cuvanje minimalne dnevne temperature
-				$GLOBALS['data']['vremenska_prognoza']['dnevna_min_temp'] = 
+				$GLOBALS['data']['vremenska_prognoza']['dnevna_min_temp'] =
 					intval($xml->forecast->simpleforecast->forecastdays->forecastday[0]->low->celsius);
 
 				// Cuvanje ikone dnevnih uslova
-				$GLOBALS['data']['vremenska_prognoza']['dnevna_ikona'] = 
+				$GLOBALS['data']['vremenska_prognoza']['dnevna_ikona'] =
 					getSunlightStatus().$xml->forecast->simpleforecast->forecastdays->forecastday[0]->icon;
 
 				// Cuvanje dnevne verovatnoce padavina
-				$GLOBALS['data']['vremenska_prognoza']['padavine'] = 
+				$GLOBALS['data']['vremenska_prognoza']['padavine'] =
 					$xml->forecast->simpleforecast->forecastdays->forecastday[0]->pop;
 
 				// Cuvanje trenutne vidljivosti
 				if (strcmp($xml->current_observation->visibility_km, "N/A")) {
 					$vidljivost = floatval($xml->current_observation->visibility_km);
-					
+
 					if (floor($vidljivost) == $vidljivost)
 						$GLOBALS['data']['vremenska_prognoza']['vidljivost'] = floor($vidljivost)." km";
 					elseif ($vidljivost >= 0.1)
 						$GLOBALS['data']['vremenska_prognoza']['vidljivost'] = ($vidljivost * 1000)." m";
-					else 
+					else
 						$GLOBALS['data']['vremenska_prognoza']['vidljivost'] = "< 100m";
 				}
 
 				// Cuvanje subjektivne temperature
-				$GLOBALS['data']['vremenska_prognoza']['subjektivni_osecaj'] = 
+				$GLOBALS['data']['vremenska_prognoza']['subjektivni_osecaj'] =
 					$xml->current_observation->feelslike_c;
 
 				// Cuvanje naziva dana
@@ -102,31 +104,33 @@
 				// Cuvanje opisa dnevnih vremenskih uslova
 				$GLOBALS['data']['vremenska_prognoza']['dnevna_stanje'] =
 					str_replace($cyr, $lat, $xml->forecast->simpleforecast->forecastdays->forecastday[0]->conditions);
+				$GLOBALS['data']['vremenska_prognoza']['dnevna_stanje'] =
+					str_replace("oluja sa grmljavinom", "oluja", $GLOBALS['data']['vremenska_prognoza']['dnevna_stanje']);
 
 				// Cuvanje vrednosti UV indeksa
-				$GLOBALS['data']['vremenska_prognoza']['uv_indeks'] = 
+				$GLOBALS['data']['vremenska_prognoza']['uv_indeks'] =
 					$xml->current_observation->UV;
 
 				upis();
 				$updated = 3;
 
 			}
-			
+
 		}
 
 		return $updated;
 	}
-	
+
 	function getSunlightStatus() {
 		// Provera da li se trenutno vreme nalazi izmedju vremena izlaska i zalaska sunca.
 		// Koristi UNIX timestamp
 		$trenutnoVreme = microtime(true);
 		$zalazak = date_sunset(time(), SUNFUNCS_RET_TIMESTAMP, $GLOBALS['data']['lokacija']['geo_sirina'], $GLOBALS['data']['lokacija']['geo_duzina'], 90, 1);
 		$izlazak = date_sunrise(time(), SUNFUNCS_RET_TIMESTAMP, $GLOBALS['data']['lokacija']['geo_sirina'], $GLOBALS['data']['lokacija']['geo_duzina'], 90, 1);
-		
+
 		if ($trenutnoVreme >= $izlazak && $trenutnoVreme <= $zalazak)
 			return "";
-		
+
 		return "nt_";
 	}
 
@@ -155,15 +159,15 @@
 	}
 
 	function getPadavine() {
-		return $GLOBALS['data']['vremenska_prognoza']['padavine'];
+		return intval($GLOBALS['data']['vremenska_prognoza']['padavine']);
 	}
 
 	function getVisibility() {
-		return $GLOBALS['data']['vremenska_prognoza']['vidljivost'];
+    return $GLOBALS['data']['vremenska_prognoza']['vidljivost'];
 	}
 
 	function getSubTemp() {
-		return $GLOBALS['data']['vremenska_prognoza']['subjektivni_osecaj'];
+		return intval($GLOBALS['data']['vremenska_prognoza']['subjektivni_osecaj']);
 	}
 
 	function getNazivDana() {
@@ -176,7 +180,7 @@
 
 	function getUV() {
 		$uv = 0;
-		
+
 		if ($GLOBALS['data']['vremenska_prognoza']['uv_indeks'] >= 11)
 			$uv = 4;
 		else if ($GLOBALS['data']['vremenska_prognoza']['uv_indeks'] >= 8)
@@ -185,10 +189,10 @@
 			$uv = 2;
 		else if ($GLOBALS['data']['vremenska_prognoza']['uv_indeks'] >= 3)
 			$uv = 1;
-		
+
 		return $uv;
 	}
-	
+
 	function getCityName() {
 		return $GLOBALS['data']['lokacija']['grad'];
 	}

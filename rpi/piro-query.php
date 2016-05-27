@@ -7,7 +7,7 @@
 	require ("relay-control.php");
 	require ("weather.php");
 	require ("shell-commands.php");
-	
+
 	// piro-query.php?f=funkcija&arg=parametar
 
 	// NOTE: Svaka izmena funkcija u posebnim
@@ -121,21 +121,47 @@
 			echo getJSONThermal();
 			break;
 	}
-	
+
 	function getJSON($a) {
 		azurirajVreme($a);
-		
-		return "{ "."\"ledCentar\":\"".getRelayStatus(0)."\", \"ledDesno\":\"".getRelayStatus(1)."\", \"ledLevo\":\"".getRelayStatus(2)."\", \"racunar\":\""
-		.getPCStatus()."\", \"statusPeci\":\"".thermalStatus()."\", \"temperaturaPeci\":\"".getTemp()."\", \"rezimPeci\":\"".getMode()."\", \"grad\":\""
-		.getCityName()."\", \"trenutnaTemperatura\":\"".getWTemp()."\", \"trenutnaStanje\":\"".getDesc()."\", \"trenutnaIkona\":\""
-		.getIcon()."\", \"padavine\":\"".getPadavine()."\", \"vidljivost\":\"".getVisibility()."\", \"subjektivniOsecaj\":\""
-		.getSubTemp()."\", \"uvIndeks\":\"".getUV()."\", \"dan\":\"".getNazivDana()."\", \"dnevnaStanje\":\""
-		.getDescDaily()."\", \"dnevnaMax\":\"".getMaxTemp()."\", \"dnevnaMin\":\"".getMinTemp()."\", \"dnevnaIkona\":\""
-		.getIconDaily()."\", \"systemUptime\":\"".getUptime()."\", \"systemTemperature\":\"".getShellTemp()."\", \"systemLoad\":\"".getLoadAvg()."\" }";
+
+		$result = array(
+			"ledCentar" => getRelayStatus(0),
+			"ledDesno" => getRelayStatus(1),
+			"ledLevo" => getRelayStatus(2),
+			"racunar" => getPCStatus(),
+			"statusPeci" => thermalStatus(),
+			"temperaturaPeci" => getTemp(),
+			"rezimPeci" => getMode(),
+			"grad" => getCityName(),
+			"trenutnaTemperatura" => getWTemp(),
+			"trenutnaStanje" => getDesc(),
+			"trenutnaIkona" => getIcon(),
+			"padavine" => getPadavine(),
+			"vidljivost" => getVisibility(),
+			"subjektivniOsecaj" => getSubTemp(),
+			"uvIndeks" => getUV(),
+			"dan" => getNazivDana(),
+			"dnevnaStanje" => getDescDaily(),
+			"dnevnaMax" => getMaxTemp(),
+			"dnevnaMin" => getMinTemp(),
+			"dnevnaIkona" => getIconDaily(),
+			"systemUptime" => getUptime(),
+			"systemTemperature" => getShellTemp(),
+			"systemLoad" => getLoadAvg()
+		);
+
+		return json_encode($result, JSON_UNESCAPED_UNICODE);
 	}
-	
+
 	function getJSONThermal() {
-		return "{ "."\"statusPeci\":\"".thermalStatus()."\", \"temperaturaPeci\":\"".getTemp()."\", \"rezimPeci\":\"".getMode()."\"}";
+		$result = array(
+			"statusPeci" => thermalStatus(),
+			"temperaturaPeci" => getTemp(),
+			"rezimPeci" => getMode()
+		);
+
+		return json_encode($result, JSON_UNESCAPED_UNICODE);
 	}
-	
+
 ?>
