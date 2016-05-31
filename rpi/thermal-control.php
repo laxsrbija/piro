@@ -27,9 +27,11 @@
 	// Postavljanja režima rada grejnog tela
 	function setMode($a, $mode = "R") {
 		
+		$GLOBALS['data']['grejanje']['rezim_peci'] = intval($a);
+		
 		if (thermalStatus() == 1) {		
 			switch($a) {
-				case 1:
+				case 0:
 					autoTemp();
 					break;
 				case 2:
@@ -42,8 +44,6 @@
 					setTemp(floatval(TEMP_ODRZAVANJE));
 					break;
 			}
-
-			$GLOBALS['data']['grejanje']['rezim_peci'] = intval($a);
 			upis();
 		}
 		
@@ -61,8 +61,10 @@
 			upis();
 		}
 		
-		if (strcmp($mode, "A") == 0) 
+		if (strcmp($mode, "A") == 0) {
+			setMode(1);
 			return getJSONThermal();
+		}
 	}
 
 	function decrement($mode = "R") {
@@ -72,8 +74,10 @@
 			upis();
 		}
 		
-		if (strcmp($mode, "A") == 0) 
+		if (strcmp($mode, "A") == 0) {
+			setMode(1);
 			return getJSONThermal();
+		}
 	}
 
 	// Paljenje i gašenje grejnog tela
