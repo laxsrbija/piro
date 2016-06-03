@@ -1,7 +1,10 @@
 <?php
-	// ini_set('display_errors', 1);
+	ini_set('display_errors', 1);
 
-	$data = parse_ini_file("rpi/piro.ini", true) or die ("<h1>Greška: Ne postoji datoteka sa konfiguracijama!</h1>");
+	class PiroData {
+		public static $data;
+	}
+	PiroData::$data = parse_ini_file("rpi/piro.ini", true) or die ("<h1>Greška: Ne postoji datoteka sa konfiguracijama!</h1>");
 
 	require ("rpi/piro-config.php");
 	require ("rpi/dbrw.php");

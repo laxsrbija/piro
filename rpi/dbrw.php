@@ -4,7 +4,7 @@
 	function upis() {
 		$res = array();
 
-		foreach($GLOBALS['data'] as $key => $val) {
+		foreach(PiroData::$data as $key => $val) {
 			if(is_array($val)) {
 				$res[] = (!empty($res) ? "\n" : "")."[$key]";
 

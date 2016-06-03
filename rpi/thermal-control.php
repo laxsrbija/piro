@@ -3,21 +3,21 @@
 	// Vraća stanje grejnog tela
 	// Ukoliko peć nije povezana, rezultat je -1
 	function thermalStatus() {
-		if (!TERM_DOSTUPNO && intval($GLOBALS['data']['grejanje']['status_peci']) != -1) {
-			$GLOBALS['data']['grejanje']['status_peci'] = -1;
+		if (!TERM_DOSTUPNO && intval(PiroData::$data['grejanje']['status_peci']) != -1) {
+			PiroData::$data['grejanje']['status_peci'] = -1;
 			upis();
 		}
-		else if (TERM_DOSTUPNO && intval($GLOBALS['data']['grejanje']['status_peci']) == -1) {
-			$GLOBALS['data']['grejanje']['status_peci'] = 0;
+		else if (TERM_DOSTUPNO && intval(PiroData::$data['grejanje']['status_peci']) == -1) {
+			PiroData::$data['grejanje']['status_peci'] = 0;
 			upis();
 		}
 
-		return $GLOBALS['data']['grejanje']['status_peci'];
+		return PiroData::$data['grejanje']['status_peci'];
 	}
 
 	// Vraća trenutnu temperaturu
 	function getTemp() {
-		return $GLOBALS['data']['grejanje']['temperatura_peci'];
+		return PiroData::$data['grejanje']['temperatura_peci'];
 	}
 
 	// Vraća režim rada grejnog tela
@@ -31,14 +31,14 @@
 	// Androida, nakon čega vraća trenutne parametre
 
 	function getMode() {
-		return $GLOBALS['data']['grejanje']['rezim_peci'];
+		return PiroData::$data['grejanje']['rezim_peci'];
 	}
 
 	// Postavljanja režima rada grejnog tela
 	function setMode($a, $mode = "R") {
 
 		if (thermalStatus() > 0) {
-			$GLOBALS['data']['grejanje']['rezim_peci'] = intval($a);
+			PiroData::$data['grejanje']['rezim_peci'] = intval($a);
 
 			switch($a) {
 				case 0:
@@ -66,7 +66,7 @@
 
 	function increment($mode = "R") {
 		if (thermalStatus() > 0 && floatval(getTemp()) < 27) {
-			$GLOBALS['data']['grejanje']['temperatura_peci'] = floatval(getTemp()) + 0.5;
+			PiroData::$data['grejanje']['temperatura_peci'] = floatval(getTemp()) + 0.5;
 			exec("gpio write ".GPIO_TERMO_INC." 0 && sleep 0.1 && gpio write ".GPIO_TERMO_INC." 1 2>&1");
 			upis();
 		}
@@ -79,7 +79,7 @@
 
 	function decrement($mode = "R") {
 		if (thermalStatus() > 0 && floatval(getTemp()) > 7) {
-			$GLOBALS['data']['grejanje']['temperatura_peci'] = floatval(getTemp()) - 0.5;
+			PiroData::$data['grejanje']['temperatura_peci'] = floatval(getTemp()) - 0.5;
 			exec("gpio write ".GPIO_TERMO_DEC." 0 && sleep 0.1 && gpio write ".GPIO_TERMO_DEC." 1 2>&1");
 			upis();
 		}
@@ -94,9 +94,9 @@
 	function toggleThermal($mode = "R") {
 		if (thermalStatus() != -1) {
 			if (thermalStatus() == 1)
-				$GLOBALS['data']['grejanje']['status_peci'] = 0;
+				PiroData::$data['grejanje']['status_peci'] = 0;
 			else
-				$GLOBALS['data']['grejanje']['status_peci'] = 1;
+				PiroData::$data['grejanje']['status_peci'] = 1;
 
 			exec("gpio write ".GPIO_TERMO_PWR." 0 && sleep 0.1 && gpio write ".GPIO_TERMO_PWR." 1 2>&1");
 			upis();
