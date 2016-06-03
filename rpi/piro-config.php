@@ -2,13 +2,16 @@
 
 	// WeatherUnderground API Key
 	define("WU_API_KEY", "WeatherUnderground API Key");
-	
+
 	// Ime zemlje i naziv grada za koji se prikazuje vremenska prognoza
 	define("WU_CITY", "Nis");
 	define("WU_COUNTRY", "Serbia");
-	
+
 	// Jezik vremenske prognoze
 	define("WU_LANG", "SR");
+
+	// Povezanost grejnog tela
+	define("TEMP_DOSTUPNO", 1);
 
 	// Konstante za dnevnu, noćnu i temperaturu održavanja
 	define("TEMP_DNEVNA", "21.5");
@@ -27,5 +30,5 @@
 
 	// GPIO pinovi za kontrolu računara
 	define("GPIO_PC", "6");
-	
+
 ?>

@@ -343,6 +343,12 @@ body {
     top: 50px;
     width: 250px;
 }
+.grejanje-nedostupno {
+  position: absolute;
+  width: 130px;
+  top: -15px;
+  left: 57px;
+}
 #grejanje-tasteri {
     bottom: 45px;
     padding-left: 24px;

@@ -17,7 +17,7 @@ function racunarToggle() {
 
 function rasvetaToggle(k) {
 	piroQuery("toggleRelay", k, "-1");
-	
+
 	if (document.getElementById("rasv-" + k + "-taster").innerHTML == "UKLJUČI") {
 		document.getElementById("rasv-" + k + "-taster").innerHTML = "ISKLJUČI";
 		document.getElementById("rasv-" + k + "-taster").className = "rasv-" + k + "-taster ukljuceno";
@@ -32,18 +32,25 @@ function rasvetaToggle(k) {
 // Učitatavanje statusa i temperature peći
 function ucitajTempStatus() {
 	piroQueryNA("thermalStatus", function() {
-			if (this.responseText == 0) {
-				document.getElementById("grejanje-vrednost").innerHTML = "Isklj.";
-
-				for (var i = 1; i <= 5; i++)
-					document.getElementById("grejanje-" + i + "-taster").src = "img/grejanje-" + i + ".png";
-			}
-			else {
-				piroQueryNA("getTemp", function() {
+			switch (this.responseText) {
+				case 0:
+					document.getElementById("grejanje-vrednost").innerHTML = "Isklj.";
+					for (var i = 1; i <= 5; i++)
+						document.getElementById("grejanje-" + i + "-taster").src = "img/grejanje-" + i + ".png";
+						console.log("PRVI");
+					break;
+				case 1:
+					piroQueryNA("getTemp", function() {
 						document.getElementById("grejanje-vrednost").innerHTML = this.responseText + "°";
 						getThermalMode();
-					}
-				);
+					});
+					console.log("DRUGI");
+					break;
+				case -1:
+					document.getElementById("grejanje-vrednost").innerHTML =
+						"<img class=\"grejanje-nedostupno\" src=\"img/grejanje-nedostupno.png\">"
+						console.log("TRECI");
+					break;
 			}
 		}
 	);

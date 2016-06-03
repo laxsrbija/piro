@@ -1,4 +1,4 @@
-<?php 
+<?php
 	// ini_set('display_errors', 1);
 
 	require ("rpi/piro-config.php");
@@ -72,7 +72,10 @@
 			</div>
 			<div>
 				<span class="grejanje">
-					<span id="grejanje-vrednost"><?php echo (thermalStatus() ? getTemp()."°" : "Isklj.") ?></span>
+					<span id="grejanje-vrednost"><?php
+						echo (thermalStatus() > 0 ? getTemp()."°" :
+							((thermalStatus() == 0) ? "Isklj." : "<img class=\"grejanje-nedostupno\" src=\"img/grejanje-nedostupno.png\">")); 
+					?></span>
 					<span id="grejanje-tasteri">
 						<a href="javascript:setThermalMode(0)"><img id="grejanje-1-taster" src="img/grejanje-1.png"></a>
 						<a href="#"><img id="grejanje-2-taster" src="img/grejanje-2.png"></a>
