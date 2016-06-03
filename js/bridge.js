@@ -3,38 +3,27 @@
 function piroQuery(q, arg, callback) {
 	var xmlhttp = new XMLHttpRequest();
 
-	xmlhttp.open("GET", "rpi/piro-query.php?f=" + q + "&arg=" + arg, true);
-
+	xmlhttp.open("GET", "rpi/piro-query.php?f=" + q + (arg != "" ? "&arg=" + arg : ""), true);
 	xmlhttp.onreadystatechange = function() {
 		if (xmlhttp.readyState == 4 && xmlhttp.status == 200 && typeof callback == "function")
 			callback.apply(xmlhttp);
 	}
-
 	xmlhttp.send();
 }
 
 // Funkcija za slanje zahteva bez parametara
 function piroQueryNA(q, callback) {
-	var xmlhttp = new XMLHttpRequest();
-
-	xmlhttp.open("GET", "rpi/piro-query.php?f=" + q, true);
-
-	xmlhttp.onreadystatechange = function() {
-		if (xmlhttp.readyState == 4 && xmlhttp.status == 200 && typeof callback == "function")
-			callback.apply(xmlhttp);
-	}
-
-	xmlhttp.send();
+	piroQuery(q, "", callback);
 }
 
 // Funkcija za učitavanje vremena
 function ucitajVreme(arg) {
-	
+
 	if (arg == "force")
 		document.getElementById("osvezi-str").className = "osvezi-rot";
-	
+
 	piroQuery("azurirajVreme", arg, function() {
-		
+
 		if (parseInt(this.responseText) > 0) {
 
 			piroQueryNA("getUV", function() {
@@ -48,8 +37,8 @@ function ucitajVreme(arg) {
 			);
 
 			piroQueryNA("getIcon", function() {
-					document.getElementById("prognoza-ikona").src = "img/weather/svg/"
-					+ this.responseText + ".svg";
+					document.getElementById("prognoza-ikona").src =
+						"img/weather/svg/" + this.responseText + ".svg";
 				}
 			);
 
@@ -59,8 +48,8 @@ function ucitajVreme(arg) {
 			);
 
 			piroQueryNA("getIconDaily", function() {
-					document.getElementById("prognoza-ikona-dnevna").src = "img/weather/svg/"
-					+ this.responseText + ".svg";
+					document.getElementById("prognoza-ikona-dnevna").src =
+						"img/weather/svg/" + this.responseText + ".svg";
 				}
 			);
 
@@ -99,9 +88,9 @@ function ucitajVreme(arg) {
 					document.getElementById("prognoza-ic-vidljivost").innerHTML = this.responseText;
 				}
 			);
-		
+
 		}
-		
+
 		if (arg == "force")
 			document.getElementById("osvezi-str").className = "";
 
