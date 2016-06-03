@@ -3,11 +3,11 @@
 	// Vraća stanje grejnog tela
 	// Ukoliko peć nije povezana, rezultat je -1
 	function thermalStatus() {
-		if (!TEMP_DOSTUPNO && intval($GLOBALS['data']['grejanje']['status_peci']) != -1) {
+		if (!TERM_DOSTUPNO && intval($GLOBALS['data']['grejanje']['status_peci']) != -1) {
 			$GLOBALS['data']['grejanje']['status_peci'] = -1;
 			upis();
 		}
-		else if (TEMP_DOSTUPNO && intval($GLOBALS['data']['grejanje']['status_peci']) == -1) {
+		else if (TERM_DOSTUPNO && intval($GLOBALS['data']['grejanje']['status_peci']) == -1) {
 			$GLOBALS['data']['grejanje']['status_peci'] = 0;
 			upis();
 		}

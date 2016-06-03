@@ -11,7 +11,7 @@
 	define("WU_LANG", "SR");
 
 	// Povezanost grejnog tela
-	define("TEMP_DOSTUPNO", 1);
+	define("TERM_DOSTUPNO", 1);
 
 	// Konstante za dnevnu, noćnu i temperaturu održavanja
 	define("TEMP_DNEVNA", "21.5");
