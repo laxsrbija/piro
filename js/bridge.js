@@ -3,11 +3,11 @@
 function piroQuery(q, arg, callback) {
 	var xmlhttp = new XMLHttpRequest();
 
-	xmlhttp.open("GET", "rpi/piro-query.php?f=" + q + (arg != "" ? "&arg=" + arg : ""), true);
+	xmlhttp.open("GET", "rpi/piro-query.php?f=" + q + (arg !== "" ? "&arg=" + arg : ""), true);
 	xmlhttp.onreadystatechange = function() {
 		if (xmlhttp.readyState == 4 && xmlhttp.status == 200 && typeof callback == "function")
 			callback.apply(xmlhttp);
-	}
+	};
 	xmlhttp.send();
 }
 
