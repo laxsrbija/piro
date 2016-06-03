@@ -33,7 +33,7 @@ function rasvetaToggle(k) {
 function ucitajTempStatus() {
 	piroQueryNA("thermalStatus", function() {
 		if (this.responseText < 1) {
-			if (this.responseText == 0)
+			if (parseInt(this.responseText) === 0)
 				document.getElementById("grejanje-vrednost").innerHTML = "Isklj.";
 			else
 				document.getElementById("grejanje-vrednost").innerHTML =
@@ -78,24 +78,15 @@ function setThermalMode(arg) {
 		});
 }
 
-// Inkrementacija temperature
-function povecajTemperaturu() {
+// Inkrementacija i dekrementacija temperature
+// 1 - inkrementiraj
+// 0 - dekrementiraj
+function promeniTemperaturu(arg) {
 	if (document.getElementById("grejanje-vrednost").innerHTML != "Isklj.")
-		piroQueryNA("increment", function() {
-				ucitajTempStatus();
-				setThermalMode(1);
-			}
-		);
-}
-
-// Dekrementacija temperature
-function smanjiTemperaturu() {
-	if (document.getElementById("grejanje-vrednost").innerHTML != "Isklj.")
-		piroQueryNA("decrement", function() {
-				ucitajTempStatus();
-				setThermalMode(1);
-			}
-		);
+		piroQueryNA((arg == 1 ? "increment" : "decrement"), function() {
+			ucitajTempStatus();
+			setThermalMode(1);
+		});
 }
 
 function checkMode(a, b) {

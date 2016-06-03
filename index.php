@@ -87,9 +87,9 @@
 						<a href="javascript:setThermalMode(4)"><img id="grejanje-5-taster" src="img/grejanje-5.png"></a>
 					</span>
 					<script>checkMode(<?php echo thermalStatus() ?>, <?php echo getMode() + 1 ?>)</script>
-					<a class="grejanje-pojacaj" href="javascript:povecajTemperaturu()"><img src="img/grejanje-inkrementacija.png"></a>
+					<a class="grejanje-pojacaj" href="javascript:promeniTemperaturu(1)"><img src="img/grejanje-inkrementacija.png"></a>
 					<a class="grejanje-snaga" href="javascript:grejanjeToggle()"><img src="img/grejanje-pwr.png"></a>
-					<a class="grejanje-smanji" href="javascript:smanjiTemperaturu()"><img src="img/grejanje-dekrementacija.png"></a>
+					<a class="grejanje-smanji" href="javascript:promeniTemperaturu(0)"><img src="img/grejanje-dekrementacija.png"></a>
 				</span>
 				<br>
 				<span class="status">
