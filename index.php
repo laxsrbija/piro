@@ -1,6 +1,8 @@
 <?php
 	// ini_set('display_errors', 1);
 
+	$data = parse_ini_file("rpi/piro.ini", true) or die ("<h1>Greška: Ne postoji datoteka sa konfiguracijama!</h1>");
+
 	require ("rpi/piro-config.php");
 	require ("rpi/dbrw.php");
 	require ("rpi/thermal-control.php");
@@ -19,8 +21,6 @@
 		<link rel="stylesheet" type="text/css" href="css/piro-desktop.css">
 		<script type="text/javascript" src="js/piro.js"></script>
 		<script type="text/javascript" src="js/bridge.js"></script>
-		<!-- <script src="../dist/sweetalert.min.js"></script> -->
-		<!-- <link rel="stylesheet" type="text/css" href="../dist/sweetalert.css"> -->
 		<link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
 	</head>
 	<body onLoad="inicijalnoPokretanje()">
@@ -74,11 +74,11 @@
 				<span class="grejanje">
 					<span id="grejanje-vrednost"><?php
 						echo (thermalStatus() > 0 ? getTemp()."°" :
-							((thermalStatus() == 0) ? "Isklj." : "<img class=\"grejanje-nedostupno\" src=\"img/grejanje-nedostupno.png\">")); 
+							((thermalStatus() == 0) ? "Isklj." : "<img class=\"grejanje-nedostupno\" src=\"img/grejanje-nedostupno.png\">"));
 					?></span>
 					<span id="grejanje-tasteri">
 						<a href="javascript:setThermalMode(0)"><img id="grejanje-1-taster" src="img/grejanje-1.png"></a>
-						<a href="#"><img id="grejanje-2-taster" src="img/grejanje-2.png"></a>
+						<a><img id="grejanje-2-taster" src="img/grejanje-2.png"></a>
 						<a href="javascript:setThermalMode(2)"><img id="grejanje-3-taster" src="img/grejanje-3.png"></a>
 						<a href="javascript:setThermalMode(3)"><img id="grejanje-4-taster" src="img/grejanje-4.png"></a>
 						<a href="javascript:setThermalMode(4)"><img id="grejanje-5-taster" src="img/grejanje-5.png"></a>

@@ -32,28 +32,23 @@ function rasvetaToggle(k) {
 // Učitatavanje statusa i temperature peći
 function ucitajTempStatus() {
 	piroQueryNA("thermalStatus", function() {
-			switch (this.responseText) {
-				case 0:
-					document.getElementById("grejanje-vrednost").innerHTML = "Isklj.";
-					for (var i = 1; i <= 5; i++)
-						document.getElementById("grejanje-" + i + "-taster").src = "img/grejanje-" + i + ".png";
-						console.log("PRVI");
-					break;
-				case 1:
-					piroQueryNA("getTemp", function() {
-						document.getElementById("grejanje-vrednost").innerHTML = this.responseText + "°";
-						getThermalMode();
-					});
-					console.log("DRUGI");
-					break;
-				case -1:
-					document.getElementById("grejanje-vrednost").innerHTML =
-						"<img class=\"grejanje-nedostupno\" src=\"img/grejanje-nedostupno.png\">"
-						console.log("TRECI");
-					break;
-			}
+		if (this.responseText < 1) {
+			if (this.responseText == 0)
+				document.getElementById("grejanje-vrednost").innerHTML = "Isklj.";
+			else
+				document.getElementById("grejanje-vrednost").innerHTML =
+					"<img class=\"grejanje-nedostupno\" src=\"img/grejanje-nedostupno.png\">";
+
+			for (var i = 1; i <= 5; i++)
+				document.getElementById("grejanje-" + i + "-taster").src = "img/grejanje-" + i + ".png";
 		}
-	);
+		else {
+			piroQueryNA("getTemp", function() {
+				document.getElementById("grejanje-vrednost").innerHTML = this.responseText + "°";
+				getThermalMode();
+			});
+		}
+	});
 }
 
 // Paljenje i gašenje grejnog tela
