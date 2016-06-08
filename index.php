@@ -95,7 +95,7 @@
 				<span class="status">
 					<img id="status-icon" src="img/ok.png">
 					<span id="status-status">Svi servisi su dostupni</span>
-					<span id="status-uptime" class="status-tekst">Operativno vreme: <?php echo getUptime() ? getUptime()." dan" :  "Server je pokrenut danas." ?></span>
+					<span id="status-uptime" class="status-tekst"><?php echo getUptime() ? "Operativno vreme: ".getUptime()." dan" :  "Server je pokrenut danas." ?></span>
 					<span id="status-temperatura" class="status-tekst">Temperatura servera: <?php echo getShellTemp() ?>°C</span>
 					<span id="status-opterecenje" class="status-tekst">Prosečno opterećenje servera: <?php echo getLoadAvg() ?>%</span>
 					<script>uptimeFormatter(<?php echo getUptime() ?>)</script>
