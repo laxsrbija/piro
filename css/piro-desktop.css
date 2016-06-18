@@ -3,7 +3,7 @@ body {
     background: url("../img/bg.png");
     font-family: Roboto, sans-serif;
 }
-body:focus {
+*:focus {
     outline: 0;
 }
 .dugme-labela {
