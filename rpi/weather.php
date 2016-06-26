@@ -24,7 +24,15 @@
 		// Kako ne bi došlo do prevelikog broja API zahteva,
 		// vreme se ažurira jednom u 5 minuta
 		if (time() - intval(PiroData::$data['vremenska_prognoza']['vreme_azuriranja']) >= 300 || strcmp($a, "force") == 0) {
-			$xml = simplexml_load_string(file_get_contents($apiURL));
+			// Maksimalno čekanje rezultata 3 sec
+			$wait = stream_context_create(array(
+				'http' => array(
+					'timeout' => 3
+					)
+				)
+			);
+			
+			$xml = simplexml_load_string(file_get_contents($apiURL, 0, $wait));
 
 			$updated = 2;
 
