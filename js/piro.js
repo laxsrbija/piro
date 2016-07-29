@@ -6,8 +6,7 @@ function racunarToggle() {
 		document.getElementById("racunar-taster").className = "racunar-taster ukljuceno";
 		document.getElementById("racunar-kuler").src = "img/fan-rot.gif";
 		document.getElementById("racunar-status").innerHTML = "Računar je uključen.";
-	}
-	else {
+	} else {
 		document.getElementById("racunar-taster").innerHTML = "UKLJUČI";
 		document.getElementById("racunar-taster").className = "racunar-taster iskljuceno";
 		document.getElementById("racunar-kuler").src = "img/fan.png";
@@ -21,8 +20,7 @@ function rasvetaToggle(k) {
 	if (document.getElementById("rasv-" + k + "-taster").innerHTML == "UKLJUČI") {
 		document.getElementById("rasv-" + k + "-taster").innerHTML = "ISKLJUČI";
 		document.getElementById("rasv-" + k + "-taster").className = "rasv-" + k + "-taster ukljuceno";
-	}
-	else {
+	} else {
 		document.getElementById("rasv-" + k + "-taster").innerHTML = "UKLJUČI";
 		document.getElementById("rasv-" + k + "-taster").className = "rasv-" + k + "-taster iskljuceno";
 	}
@@ -41,8 +39,7 @@ function ucitajTempStatus() {
 
 			for (var i = 1; i <= 5; i++)
 				document.getElementById("grejanje-" + i + "-taster").src = "img/grejanje-" + i + ".png";
-		}
-		else {
+		} else {
 			piroQueryNA("getTemp", function() {
 				document.getElementById("grejanje-vrednost").innerHTML = this.responseText + "°";
 				getThermalMode();
@@ -95,6 +92,8 @@ function checkMode(a, b) {
 }
 
 function uptimeFormatter(a) {
-	if (a > 0 && (a[a.length - 1] != "1" || a.lastIndexOf("11") != -1 && a.length - 2 == a.lastIndexOf("11")))
+	if (a > 1 && (a[a.length - 1] != "1" || a.lastIndexOf("11") != -1 && a.length - 2 == a.lastIndexOf("11")))
 		document.getElementById("status-uptime").innerHTML += "a";
 }
+
+window.addEventListener("focus", function(event) { ucitajVreme("R"); }, false);

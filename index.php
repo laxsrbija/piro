@@ -26,7 +26,7 @@
 		<script type="text/javascript" src="js/bridge.js"></script>
 		<link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
 	</head>
-	<body onLoad="inicijalnoPokretanje()">
+	<body>
 		<div id="nav">
 			<img src="img/logo.png" id="logo-nav">
 			<a href="#" id="podesavanja-nav" title="Podešavanja"><img src="img/podesavanja.png"></a>

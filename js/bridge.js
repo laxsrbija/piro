@@ -97,14 +97,3 @@ function ucitajVreme(arg) {
 	});
 
 }
-
-function inicijalnoPokretanje() {
-
-	// Poziva funkciju za učitavanje vremena
-	ucitajVreme("R");
-
-	// Pokušaj automatskog ažuriranja statusa
-	// Nije se pokazao uspešnim
-	//setInterval(lokalniUredjaji, 5000);
-
-}
