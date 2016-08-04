@@ -40,11 +40,6 @@ body {
     right: 20px;
     top: 7px;
 }
-#wu-nav {
-	position: absolute;
-    right: 80px;
-    top: 7px;
-}
 #podesavanja-nav:hover {
 	opacity: 1;
 }
@@ -470,8 +465,17 @@ body {
     position:fixed;
     bottom: 5px;
     right: 5px;
+    display: block;
+}
+#footer a {
     font-size: 9pt;
     font-weight: 400;
     color: #333333;
     text-decoration: none;
+	display:table-cell;
+    vertical-align:middle;   
+}
+#footer a img {
+	margin-left: 10px;
+	margin-right: 3px;
 }

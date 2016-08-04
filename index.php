@@ -30,7 +30,6 @@
 		<div id="nav">
 			<img src="img/logo.png" id="logo-nav">
 			<a href="#" id="podesavanja-nav" title="Podešavanja"><img src="img/podesavanja.png"></a>
-			<a href="https://www.wunderground.com/?apiref=bd0f471813b6ae6d" id="wu-nav" title="Weather Underground" target="_blank"><img src="img/wundergroundLogo_4c_rev.png"></a>
 		</div>
 		<div id="kontejner"><br>
 			<div class="razmak"></div>
@@ -102,6 +101,9 @@
 				</span>
 			</div>
 		</div>
-		<a href="https://github.com/laxsrbija/piro" target="_blank" id="footer">Copyright © <?php echo date("Y") ?> Lazar Stanojević. Sva prava zadržana.</a>
+		<div id="footer">
+			<a href="https://github.com/laxsrbija/piro" target="_blank">Copyright © <?php echo date("Y") ?> Lazar Stanojević. Sva prava zadržana.</a> 
+			<a href="https://www.wunderground.com/?apiref=bd0f471813b6ae6d" title="Weather Underground" target="_blank"><img src="img/wundergroundLogo_4c_horz.png"></a>
+		</div>
 	</body>
 </html>
