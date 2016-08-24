@@ -95,6 +95,8 @@
 
 					if (floor($vidljivost) == $vidljivost)
 						PiroData::$data['vremenska_prognoza']['vidljivost'] = floor($vidljivost)." km";
+					elseif ($vidljivost > 1)
+						PiroData::$data['vremenska_prognoza']['vidljivost'] = $vidljivost." km";
 					elseif ($vidljivost >= 0.1)
 						PiroData::$data['vremenska_prognoza']['vidljivost'] = ($vidljivost * 1000)." m";
 					else
